@@ -8,7 +8,7 @@ AI-powered career intelligence quiz. Classifies users into one of four psycholog
 escpcareerquiz/
 ├── index.html        ← The quiz (no API keys)
 ├── api/
-│   └── generate.js  ← Vercel serverless function (Anthropic proxy)
+│   └── generate.js  ← Vercel serverless function (OpenAI proxy)
 ├── vercel.json       ← Routing config
 └── README.md
 ```
@@ -25,11 +25,11 @@ Already done if you're reading this.
 4. Leave all settings as default
 5. Click "Deploy"
 
-### Step 3 — Add your Anthropic API key (CRITICAL)
+### Step 3 — Add your OpenAI API key (CRITICAL)
 1. In Vercel dashboard → your project → Settings → Environment Variables
 2. Add a new variable:
-   - Name:  `ANTHROPIC_API_KEY`
-   - Value: `sk-ant-...` (your key from platform.anthropic.com)
+   - Name:  `OPENAI_API_KEY`
+   - Value: `sk-proj-...` (your key from platform.openai.com)
    - Environment: Production + Preview + Development
 3. Click Save
 4. Go to Deployments → click the three dots on your latest deployment → Redeploy
@@ -59,9 +59,9 @@ Your URL will be: `https://escpcareerquiz.vercel.app` (or similar)
 
 Send to the ESCP group chat. Done.
 
-## What the Anthropic Key Is and Where It Lives
+## What the OpenAI Key Is and Where It Lives
 
-The Anthropic key is what lets the quiz generate AI results. It **never touches the browser** — it lives only in Vercel's encrypted environment variables and is called server-side by `api/generate.js`. This is why it's safe to have this repo public.
+The OpenAI key is what lets the quiz generate AI results. It **never touches the browser** — it lives only in Vercel's encrypted environment variables and is called server-side by `api/generate.js`. This is why it's safe to have this repo public.
 
 Cost per quiz completion: approximately $0.01–0.02 USD.
 

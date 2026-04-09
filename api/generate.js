@@ -14,6 +14,50 @@ function safeJsonParse(s) {
   }
 }
 
+const RESULT_JSON_SCHEMA = {
+  name: 'solis_career_protocol',
+  schema: {
+    type: 'object',
+    additionalProperties: false,
+    properties: {
+      protocol_name: { type: 'string' },
+      career_archetype: { type: 'string' },
+      fit_summary: { type: 'string' },
+      fit_roles: { type: 'array', items: { type: 'string' }, minItems: 3, maxItems: 3 },
+      career_protocol: {
+        type: 'array',
+        minItems: 3,
+        maxItems: 3,
+        items: {
+          type: 'object',
+          additionalProperties: false,
+          properties: {
+            title: { type: 'string' },
+            body: { type: 'string' },
+          },
+          required: ['title', 'body'],
+        },
+      },
+      linkedin_outreach: { type: 'string' },
+      timing_note: { type: 'string' },
+      anti_pattern: { type: 'string' },
+      final_line: { type: 'string' },
+    },
+    required: [
+      'protocol_name',
+      'career_archetype',
+      'fit_summary',
+      'fit_roles',
+      'career_protocol',
+      'linkedin_outreach',
+      'timing_note',
+      'anti_pattern',
+      'final_line',
+    ],
+  },
+  strict: true,
+};
+
 export default async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
@@ -25,35 +69,35 @@ export default async function handler(req, res) {
   const { prompt } = req.body || {};
   if (!prompt || typeof prompt !== 'string') return res.status(400).json({ error: 'Missing prompt' });
 
-  if (!process.env.ANTHROPIC_API_KEY) {
-    return res.status(500).json({ error: 'Missing ANTHROPIC_API_KEY environment variable' });
+  if (!process.env.OPENAI_API_KEY) {
+    return res.status(500).json({ error: 'Missing OPENAI_API_KEY environment variable' });
   }
 
   try {
-    const response = await fetch('https://api.anthropic.com/v1/messages', {
+    const response = await fetch('https://api.openai.com/v1/responses', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'x-api-key': process.env.ANTHROPIC_API_KEY,
-        'anthropic-version': '2023-06-01',
+        Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
       },
       body: JSON.stringify({
-        model: 'claude-3-5-sonnet-20241022',
-        max_tokens: 1400,
-        messages: [{ role: 'user', content: prompt }],
+        model: 'gpt-4.1-mini',
+        input: prompt,
+        max_output_tokens: 1600,
+        response_format: { type: 'json_schema', json_schema: RESULT_JSON_SCHEMA },
       }),
     });
 
     const data = await response.json();
 
     if (!response.ok) {
-      console.error('Anthropic API error', response.status, JSON.stringify(data));
+      console.error('OpenAI error:', JSON.stringify(data));
       return res
         .status(response.status)
-        .json({ error: data?.error?.message || 'Anthropic error', details: data?.error || null });
+        .json({ error: data?.error?.message || 'OpenAI error', details: data?.error || null });
     }
 
-    const text = data?.content?.[0]?.text || '';
+    const text = data?.output_text || '';
     const parsed = safeJsonParse(text);
 
     return res.status(200).json({

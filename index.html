@@ -1,399 +1,997 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Rise by Solis — Career Intelligence</title>
-<style>
-:root{--navy:#0F2044;--navy-l:#1a3560;--gold:#C9A84C;--cream:#FAF8F4;--text:#1a1a1a;--muted:#6B6B6B;--hint:#9A9A9A;--border:#E0DDD6;--border-d:#C8C4BC;--white:#FFFFFF;}
-*{box-sizing:border-box;margin:0;padding:0;}
-body{font-family:Georgia,serif;background:var(--cream);color:var(--text);min-height:100vh;line-height:1.6;}
-.sf{font-family:-apple-system,'Helvetica Neue',Arial,sans-serif;}
-.hdr{background:var(--navy);padding:28px 0 24px;text-align:center;}
-.hdr-mark{font-family:-apple-system,sans-serif;font-size:11px;letter-spacing:.25em;color:var(--gold);text-transform:uppercase;margin-bottom:7px;}
-.hdr-title{font-size:24px;font-weight:400;color:#fff;letter-spacing:-.01em;margin-bottom:8px;}
-.hdr-sub{font-family:-apple-system,sans-serif;font-size:12px;color:rgba(255,255,255,.45);letter-spacing:.03em;}
-.prog-wrap{background:var(--white);border-bottom:1px solid var(--border);padding:14px 0;position:sticky;top:0;z-index:10;}
-.prog-inner{display:flex;align-items:center;gap:14px;}
-.prog-bg{flex:1;height:2px;background:var(--border);border-radius:1px;overflow:hidden;}
-.prog-fill{height:100%;background:var(--gold);border-radius:1px;transition:width .4s ease;}
-.prog-lbl{font-family:-apple-system,sans-serif;font-size:11px;color:var(--hint);letter-spacing:.07em;text-transform:uppercase;white-space:nowrap;min-width:48px;text-align:right;}
-.wrap{max-width:660px;margin:0 auto;padding:0 22px;}
-.scr{display:none;}.scr.on{display:block;}
-.intro{padding:52px 0 44px;text-align:center;}
-.eyebrow{font-family:-apple-system,sans-serif;font-size:10px;letter-spacing:.3em;color:var(--gold);text-transform:uppercase;margin-bottom:18px;}
-.intro h1{font-size:32px;font-weight:400;color:var(--navy);line-height:1.2;margin-bottom:18px;letter-spacing:-.02em;}
-.intro-body{font-family:-apple-system,sans-serif;font-size:14px;color:var(--muted);line-height:1.75;max-width:460px;margin:0 auto 28px;}
-.rule{width:28px;height:1px;background:var(--gold);margin:28px auto;}
-.intro-detail{font-family:-apple-system,sans-serif;font-size:12px;color:var(--hint);letter-spacing:.04em;margin-bottom:32px;}
-.qcard{padding:44px 0 36px;}
-.q-phase{font-family:-apple-system,sans-serif;font-size:10px;letter-spacing:.3em;color:var(--gold);text-transform:uppercase;margin-bottom:8px;}
-.q-num{font-family:-apple-system,sans-serif;font-size:11px;color:var(--hint);letter-spacing:.06em;margin-bottom:14px;}
-.q-text{font-size:21px;font-weight:400;color:var(--navy);line-height:1.35;margin-bottom:7px;letter-spacing:-.01em;}
-.q-sub{font-family:-apple-system,sans-serif;font-size:13px;color:var(--muted);margin-bottom:28px;line-height:1.5;}
-.opts{display:flex;flex-direction:column;gap:9px;margin-bottom:32px;}
-.opt{display:flex;align-items:flex-start;gap:13px;padding:14px 16px;border:1px solid var(--border);border-radius:5px;background:var(--white);cursor:pointer;transition:all .17s ease;text-align:left;}
-.opt:hover{border-color:var(--navy);background:var(--cream);}
-.opt.sel{border-color:var(--navy);background:var(--navy);}
-.dot{width:17px;height:17px;border-radius:50%;border:1.5px solid var(--border-d);flex-shrink:0;margin-top:2px;transition:all .17s;display:flex;align-items:center;justify-content:center;}
-.opt.sel .dot{background:var(--gold);border-color:var(--gold);}
-.dot-i{width:6px;height:6px;border-radius:50%;background:var(--navy);opacity:0;transition:opacity .17s;}
-.opt.sel .dot-i{opacity:1;}
-.opt-lbl{font-family:-apple-system,sans-serif;font-size:14px;color:var(--text);line-height:1.5;transition:color .17s;}
-.opt.sel .opt-lbl{color:#fff;}
-.opt-sub{font-size:12px;color:var(--muted);margin-top:2px;transition:color .17s;}
-.opt.sel .opt-sub{color:rgba(255,255,255,.55);}
-.tinput{width:100%;padding:13px 15px;border:1px solid var(--border);border-radius:5px;font-family:-apple-system,sans-serif;font-size:14px;color:var(--text);background:var(--white);outline:none;transition:border-color .17s;resize:none;line-height:1.5;margin-bottom:32px;}
-.tinput:focus{border-color:var(--navy);}
-.tinput::placeholder{color:var(--hint);}
-.nav{display:flex;justify-content:space-between;align-items:center;gap:12px;}
-.email-scr{padding:52px 0 44px;text-align:center;}
-.email-scr h2{font-size:26px;font-weight:400;color:var(--navy);margin-bottom:12px;letter-spacing:-.01em;}
-.email-scr p{font-family:-apple-system,sans-serif;font-size:14px;color:var(--muted);margin-bottom:28px;line-height:1.65;}
-.email-row{display:flex;gap:9px;max-width:400px;margin:0 auto 10px;}
-.email-inp{flex:1;padding:12px 15px;border:1px solid var(--border-d);border-radius:5px;font-family:-apple-system,sans-serif;font-size:14px;outline:none;transition:border-color .17s;background:var(--white);}
-.email-inp:focus{border-color:var(--navy);}
-.email-priv{font-family:-apple-system,sans-serif;font-size:11px;color:var(--hint);letter-spacing:.02em;}
-.err{font-family:-apple-system,sans-serif;font-size:12px;color:#8B1A1A;margin-top:7px;display:none;}
-.btn{font-family:-apple-system,sans-serif;font-size:12px;font-weight:400;letter-spacing:.09em;text-transform:uppercase;padding:12px 26px;border-radius:4px;cursor:pointer;transition:all .17s;border:none;display:inline-block;}
-.btn-p{background:var(--navy);color:#fff;}
-.btn-p:hover{background:var(--navy-l);}
-.btn-p:disabled{background:var(--border-d);cursor:not-allowed;}
-.btn-g{background:transparent;color:var(--muted);border:1px solid var(--border);padding:11px 22px;}
-.btn-g:hover{border-color:var(--navy);color:var(--navy);}
-.btn-w{width:100%;text-align:center;}
-.loading{padding:80px 0;text-align:center;}
-.spinner{width:30px;height:30px;border:2px solid var(--border);border-top-color:var(--navy);border-radius:50%;animation:spin .9s linear infinite;margin:0 auto 22px;}
-@keyframes spin{to{transform:rotate(360deg);}}
-.loading-t{font-size:17px;color:var(--navy);margin-bottom:8px;}
-.loading-s{font-family:-apple-system,sans-serif;font-size:12px;color:var(--hint);letter-spacing:.04em;}
-.result{padding:44px 0 56px;}
-.res-hdr{border-left:2px solid var(--gold);padding-left:18px;margin-bottom:36px;}
-.res-eye{font-family:-apple-system,sans-serif;font-size:10px;letter-spacing:.3em;color:var(--gold);text-transform:uppercase;margin-bottom:9px;}
-.res-arch{font-size:28px;font-weight:400;color:var(--navy);margin-bottom:5px;letter-spacing:-.02em;}
-.res-tag{font-family:-apple-system,sans-serif;font-size:13px;color:var(--muted);font-style:italic;}
-.res-rule{height:1px;background:var(--border);margin:28px 0;}
-.res-sec{margin-bottom:32px;}
-.res-sec-lbl{font-family:-apple-system,sans-serif;font-size:10px;letter-spacing:.3em;color:var(--hint);text-transform:uppercase;margin-bottom:12px;}
-.res-body{font-size:15px;color:var(--text);line-height:1.85;white-space:pre-wrap;}
-.act-card{background:var(--white);border:1px solid var(--border);border-radius:5px;padding:18px 20px;margin-bottom:10px;}
-.act-n{font-family:-apple-system,sans-serif;font-size:10px;letter-spacing:.2em;color:var(--gold);text-transform:uppercase;margin-bottom:7px;}
-.act-t{font-family:-apple-system,sans-serif;font-size:14px;font-weight:500;color:var(--navy);margin-bottom:7px;}
-.act-b{font-family:-apple-system,sans-serif;font-size:13px;color:var(--muted);line-height:1.6;}
-.res-foot{background:var(--navy);border-radius:5px;padding:22px;text-align:center;margin-top:36px;}
-.res-foot-s{font-family:-apple-system,sans-serif;font-size:11px;color:rgba(255,255,255,.4);letter-spacing:.09em;text-transform:uppercase;margin-bottom:5px;}
-.res-foot-b{font-size:17px;color:var(--gold);letter-spacing:.07em;}
-.fb-wrap{margin-top:48px;padding-top:40px;border-top:1px solid var(--border);}
-.fb-title{font-size:19px;font-weight:400;color:var(--navy);margin-bottom:6px;}
-.fb-sub{font-family:-apple-system,sans-serif;font-size:13px;color:var(--muted);margin-bottom:28px;line-height:1.5;}
-.fb-q{margin-bottom:28px;}
-.fb-qlbl{font-family:-apple-system,sans-serif;font-size:13px;font-weight:500;color:var(--navy);margin-bottom:5px;line-height:1.4;}
-.fb-qlbl-sub{font-family:-apple-system,sans-serif;font-size:11px;color:var(--hint);margin-bottom:12px;letter-spacing:.02em;}
-.stars{display:flex;gap:8px;margin-bottom:0;}
-.star{font-size:24px;cursor:pointer;color:var(--border-d);transition:color .15s;user-select:none;line-height:1;}
-.star.lit{color:var(--gold);}
-.fb-text{width:100%;padding:11px 14px;border:1px solid var(--border);border-radius:5px;font-family:-apple-system,sans-serif;font-size:13px;color:var(--text);background:var(--white);outline:none;resize:none;line-height:1.5;transition:border-color .17s;}
-.fb-text:focus{border-color:var(--navy);}
-.fb-text::placeholder{color:var(--hint);}
-.fb-sent{font-family:-apple-system,sans-serif;font-size:13px;color:#2D6A4F;display:none;margin-top:12px;letter-spacing:.02em;}
-@media(max-width:480px){
-  .intro h1{font-size:26px;}.q-text{font-size:18px;}.email-row{flex-direction:column;}.res-arch{font-size:22px;}
-}
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rise by Solis — Career Intelligence</title>
+  <style>
+    :root {
+      --navy: #0F2044;
+      --navy-l: #1a3560;
+      --gold: #C9A84C;
+      --cream: #FAF8F4;
+      --text: #1a1a1a;
+      --muted: #6B6B6B;
+      --hint: #9A9A9A;
+      --border: #E0DDD6;
+      --border-d: #C8C4BC;
+      --white: #FFFFFF;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Georgia, serif;
+      background: var(--cream);
+      color: var(--text);
+      min-height: 100vh;
+      line-height: 1.6;
+    }
+
+    .sf {
+      font-family: -apple-system, 'Helvetica Neue', Arial, sans-serif;
+    }
+
+    .hdr {
+      background: var(--navy);
+      padding: 28px 0 24px;
+      text-align: center;
+    }
+
+    .hdr-mark {
+      font-family: -apple-system, sans-serif;
+      font-size: 11px;
+      letter-spacing: .25em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 7px;
+    }
+
+    .hdr-title {
+      font-size: 24px;
+      font-weight: 400;
+      color: #fff;
+      letter-spacing: -.01em;
+      margin-bottom: 8px;
+    }
+
+    .hdr-sub {
+      font-family: -apple-system, sans-serif;
+      font-size: 12px;
+      color: rgba(255, 255, 255, .45);
+      letter-spacing: .03em;
+    }
+
+    .prog-wrap {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 0;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .prog-inner {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .prog-bg {
+      flex: 1;
+      height: 2px;
+      background: var(--border);
+      border-radius: 1px;
+      overflow: hidden;
+    }
+
+    .prog-fill {
+      height: 100%;
+      background: var(--gold);
+      border-radius: 1px;
+      transition: width .4s ease;
+    }
+
+    .prog-lbl {
+      font-family: -apple-system, sans-serif;
+      font-size: 11px;
+      color: var(--hint);
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      min-width: 48px;
+      text-align: right;
+    }
+
+    .wrap {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    .scr {
+      display: none;
+    }
+
+    .scr.on {
+      display: block;
+    }
+
+    .intro {
+      padding: 52px 0 44px;
+      text-align: center;
+    }
+
+    .eyebrow {
+      font-family: -apple-system, sans-serif;
+      font-size: 10px;
+      letter-spacing: .3em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .intro h1 {
+      font-size: 36px;
+      font-weight: 400;
+      color: var(--navy);
+      line-height: 1.2;
+      margin-bottom: 18px;
+      letter-spacing: -.02em;
+    }
+
+    .intro-body {
+      font-family: -apple-system, sans-serif;
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.75;
+      max-width: 460px;
+      margin: 0 auto 28px;
+    }
+
+    .rule {
+      width: 28px;
+      height: 1px;
+      background: var(--gold);
+      margin: 28px auto;
+    }
+
+    .intro-detail {
+      font-family: -apple-system, sans-serif;
+      font-size: 12px;
+      color: var(--hint);
+      letter-spacing: .04em;
+      margin-bottom: 32px;
+    }
+
+    .qcard {
+      padding: 52px 0 44px;
+    }
+
+    .q-phase {
+      font-family: -apple-system, sans-serif;
+      font-size: 10px;
+      letter-spacing: .3em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .q-num {
+      font-family: -apple-system, sans-serif;
+      font-size: 11px;
+      color: var(--hint);
+      letter-spacing: .06em;
+      margin-bottom: 14px;
+    }
+
+    .q-text {
+      font-size: 23px;
+      font-weight: 400;
+      color: var(--navy);
+      line-height: 1.35;
+      margin-bottom: 7px;
+      letter-spacing: -.01em;
+    }
+
+    .q-sub {
+      font-family: -apple-system, sans-serif;
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 28px;
+      line-height: 1.5;
+    }
+
+    .opts {
+      display: flex;
+      flex-direction: column;
+      gap: 11px;
+      margin-bottom: 32px;
+    }
+
+    .opt {
+      display: flex;
+      align-items: flex-start;
+      gap: 13px;
+      padding: 16px 18px;
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      background: var(--white);
+      cursor: pointer;
+      transition: all .17s ease;
+      text-align: left;
+    }
+
+    .opt:hover {
+      border-color: var(--navy);
+      background: var(--cream);
+    }
+
+    .opt.sel {
+      border-color: var(--navy);
+      background: var(--navy);
+    }
+
+    .dot {
+      width: 17px;
+      height: 17px;
+      border-radius: 50%;
+      border: 1.5px solid var(--border-d);
+      flex-shrink: 0;
+      margin-top: 2px;
+      transition: all .17s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .opt.sel .dot {
+      background: var(--gold);
+      border-color: var(--gold);
+    }
+
+    .dot-i {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--navy);
+      opacity: 0;
+      transition: opacity .17s;
+    }
+
+    .opt.sel .dot-i {
+      opacity: 1;
+    }
+
+    .opt-lbl {
+      font-family: -apple-system, sans-serif;
+      font-size: 14px;
+      color: var(--text);
+      line-height: 1.5;
+      transition: color .17s;
+    }
+
+    .opt.sel .opt-lbl {
+      color: #fff;
+    }
+
+    .opt-sub {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 2px;
+      transition: color .17s;
+    }
+
+    .opt.sel .opt-sub {
+      color: rgba(255, 255, 255, .55);
+    }
+
+    .tinput {
+      width: 100%;
+      padding: 13px 15px;
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      font-family: -apple-system, sans-serif;
+      font-size: 14px;
+      color: var(--text);
+      background: var(--white);
+      outline: none;
+      transition: border-color .17s;
+      resize: none;
+      line-height: 1.5;
+      margin-bottom: 32px;
+    }
+
+    .tinput:focus {
+      border-color: var(--navy);
+    }
+
+    .tinput::placeholder {
+      color: var(--hint);
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .email-scr {
+      padding: 52px 0 44px;
+      text-align: center;
+    }
+
+    .email-scr h2 {
+      font-size: 26px;
+      font-weight: 400;
+      color: var(--navy);
+      margin-bottom: 12px;
+      letter-spacing: -.01em;
+    }
+
+    .email-scr p {
+      font-family: -apple-system, sans-serif;
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 28px;
+      line-height: 1.65;
+    }
+
+    .email-row {
+      display: flex;
+      gap: 9px;
+      max-width: 400px;
+      margin: 0 auto 10px;
+    }
+
+    .email-inp {
+      flex: 1;
+      padding: 12px 15px;
+      border: 1px solid var(--border-d);
+      border-radius: 5px;
+      font-family: -apple-system, sans-serif;
+      font-size: 14px;
+      outline: none;
+      transition: border-color .17s;
+      background: var(--white);
+    }
+
+    .email-inp:focus {
+      border-color: var(--navy);
+    }
+
+    .email-priv {
+      font-family: -apple-system, sans-serif;
+      font-size: 11px;
+      color: var(--hint);
+      letter-spacing: .02em;
+    }
+
+    .err {
+      font-family: -apple-system, sans-serif;
+      font-size: 12px;
+      color: #8B1A1A;
+      margin-top: 7px;
+      display: none;
+    }
+
+    .btn {
+      font-family: -apple-system, sans-serif;
+      font-size: 12px;
+      font-weight: 400;
+      letter-spacing: .09em;
+      text-transform: uppercase;
+      padding: 12px 26px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all .17s;
+      border: none;
+      display: inline-block;
+    }
+
+    .btn-p {
+      background: var(--navy);
+      color: #fff;
+    }
+
+    .btn-p:hover {
+      background: var(--navy-l);
+    }
+
+    .btn-p:disabled {
+      background: var(--border-d);
+      cursor: not-allowed;
+    }
+
+    .btn-g {
+      background: transparent;
+      color: var(--muted);
+      border: 1px solid var(--border);
+      padding: 11px 22px;
+    }
+
+    .btn-g:hover {
+      border-color: var(--navy);
+      color: var(--navy);
+    }
+
+    .btn-w {
+      width: 100%;
+      text-align: center;
+    }
+
+    .loading {
+      padding: 80px 0;
+      text-align: center;
+    }
+
+    .spinner {
+      width: 30px;
+      height: 30px;
+      border: 2px solid var(--border);
+      border-top-color: var(--navy);
+      border-radius: 50%;
+      animation: spin .9s linear infinite;
+      margin: 0 auto 22px;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .loading-t {
+      font-size: 17px;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+
+    .loading-s {
+      font-family: -apple-system, sans-serif;
+      font-size: 12px;
+      color: var(--hint);
+      letter-spacing: .04em;
+    }
+
+    .result {
+      padding: 44px 0 56px;
+    }
+
+    .res-hdr {
+      border-left: 2px solid var(--gold);
+      padding-left: 18px;
+      margin-bottom: 36px;
+    }
+
+    .res-eye {
+      font-family: -apple-system, sans-serif;
+      font-size: 10px;
+      letter-spacing: .3em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 9px;
+    }
+
+    .res-arch {
+      font-size: 28px;
+      font-weight: 400;
+      color: var(--navy);
+      margin-bottom: 5px;
+      letter-spacing: -.02em;
+    }
+
+    .res-tag {
+      font-family: -apple-system, sans-serif;
+      font-size: 13px;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .res-rule {
+      height: 1px;
+      background: var(--border);
+      margin: 28px 0;
+    }
+
+    .res-sec {
+      margin-bottom: 32px;
+    }
+
+    .res-sec-lbl {
+      font-family: -apple-system, sans-serif;
+      font-size: 10px;
+      letter-spacing: .3em;
+      color: var(--hint);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .res-body {
+      font-size: 15px;
+      color: var(--text);
+      line-height: 1.85;
+      white-space: pre-wrap;
+    }
+
+    .act-card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      padding: 18px 20px;
+      margin-bottom: 10px;
+    }
+
+    .act-n {
+      font-family: -apple-system, sans-serif;
+      font-size: 10px;
+      letter-spacing: .2em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-bottom: 7px;
+    }
+
+    .act-t {
+      font-family: -apple-system, sans-serif;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--navy);
+      margin-bottom: 7px;
+    }
+
+    .act-b {
+      font-family: -apple-system, sans-serif;
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    .res-foot {
+      background: var(--navy);
+      border-radius: 5px;
+      padding: 22px;
+      text-align: center;
+      margin-top: 36px;
+    }
+
+    .res-foot-s {
+      font-family: -apple-system, sans-serif;
+      font-size: 11px;
+      color: rgba(255, 255, 255, .4);
+      letter-spacing: .09em;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+
+    .res-foot-b {
+      font-size: 17px;
+      color: var(--gold);
+      letter-spacing: .07em;
+    }
+
+    .fb-wrap {
+      margin-top: 48px;
+      padding-top: 40px;
+      border-top: 1px solid var(--border);
+    }
+
+    .fb-title {
+      font-size: 19px;
+      font-weight: 400;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+
+    .fb-sub {
+      font-family: -apple-system, sans-serif;
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 28px;
+      line-height: 1.5;
+    }
+
+    .fb-q {
+      margin-bottom: 28px;
+    }
+
+    .fb-qlbl {
+      font-family: -apple-system, sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--navy);
+      margin-bottom: 5px;
+      line-height: 1.4;
+    }
+
+    .fb-qlbl-sub {
+      font-family: -apple-system, sans-serif;
+      font-size: 11px;
+      color: var(--hint);
+      margin-bottom: 12px;
+      letter-spacing: .02em;
+    }
+
+    .stars {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 0;
+    }
+
+    .star {
+      font-size: 24px;
+      cursor: pointer;
+      color: var(--border-d);
+      transition: color .15s;
+      user-select: none;
+      line-height: 1;
+    }
+
+    .star.lit {
+      color: var(--gold);
+    }
+
+    .fb-text {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      font-family: -apple-system, sans-serif;
+      font-size: 13px;
+      color: var(--text);
+      background: var(--white);
+      outline: none;
+      resize: none;
+      line-height: 1.5;
+      transition: border-color .17s;
+    }
+
+    .fb-text:focus {
+      border-color: var(--navy);
+    }
+
+    .fb-text::placeholder {
+      color: var(--hint);
+    }
+
+    .fb-sent {
+      font-family: -apple-system, sans-serif;
+      font-size: 13px;
+      color: #2D6A4F;
+      display: none;
+      margin-top: 12px;
+      letter-spacing: .02em;
+    }
+
+    @media(max-width:480px) {
+      .intro h1 {
+        font-size: 26px;
+      }
+
+      .q-text {
+        font-size: 18px;
+      }
+
+      .email-row {
+        flex-direction: column;
+      }
+
+      .res-arch {
+        font-size: 22px;
+      }
+    }
+  </style>
 </head>
+
 <body>
 
-<div class="hdr">
-  <div class="hdr-mark">Rise by Solis</div>
-  <div class="hdr-title">Career Intelligence</div>
-  <div class="hdr-sub">ESCP Bachelor in Management &nbsp;·&nbsp; Class of 2026</div>
-</div>
-
-<div id="progWrap" style="display:none;" class="prog-wrap">
-  <div class="wrap">
-    <div class="prog-inner">
-      <div class="prog-bg"><div class="prog-fill" id="progFill" style="width:0%"></div></div>
-      <div class="prog-lbl sf" id="progLbl">1 / 10</div>
-    </div>
-  </div>
-</div>
-
-<div class="wrap">
-
-  <div class="scr on" id="scr-intro">
-    <div class="intro">
-      <div class="eyebrow">Career Protocol</div>
-      <h1>The right path isn't found.<br>It's recognised.</h1>
-      <p class="intro-body">Ten questions. A personalised career intelligence report — your optimal sector, role archetype, and the three moves to make right now.</p>
-      <div class="rule"></div>
-      <div class="intro-detail sf">10 questions &nbsp;·&nbsp; 4 minutes &nbsp;·&nbsp; Your result, privately delivered</div>
-      <button class="btn btn-p" onclick="startQuiz()">Begin &rarr;</button>
-    </div>
+  <div class="hdr">
+    <div class="hdr-mark">Rise by Solis</div>
+    <div class="hdr-title">Career Intelligence</div>
+    <div class="hdr-sub">ESCP Bachelor in Management &nbsp;·&nbsp; Class of 2027</div>
   </div>
 
-  <div class="scr" id="scr-q">
-    <div class="qcard" id="qContent"></div>
-    <div class="nav">
-      <button class="btn btn-g" id="btnBack" onclick="goBack()">&larr; Back</button>
-      <button class="btn btn-p" id="btnNext" onclick="goNext()" disabled>Continue &rarr;</button>
-    </div>
-  </div>
-
-  <div class="scr" id="scr-email">
-    <div class="email-scr">
-      <div class="eyebrow">Almost there</div>
-      <h2>Where should we send your protocol?</h2>
-      <p>Your career report appears here instantly and arrives in your inbox.<br>No newsletters. No noise.</p>
-      <div class="email-row">
-        <input type="email" class="email-inp sf" id="emailInp" placeholder="your@email.com" oninput="chkEmail()">
-        <button class="btn btn-p" id="btnGen" onclick="generate()" disabled>Generate &rarr;</button>
+  <div id="progWrap" style="display:none;" class="prog-wrap">
+    <div class="wrap">
+      <div class="prog-inner">
+        <div class="prog-bg">
+          <div class="prog-fill" id="progFill" style="width:0%"></div>
+        </div>
+        <div class="prog-lbl sf" id="progLbl">1 / 10</div>
       </div>
-      <div class="err" id="emailErr">Please enter a valid email address.</div>
-      <p class="email-priv sf" style="margin-top:10px;">Your data stays yours. We never share or sell it.</p>
     </div>
   </div>
 
-  <div class="scr" id="scr-load">
-    <div class="loading">
-      <div class="spinner"></div>
-      <div class="loading-t">Reading your profile.</div>
-      <div class="loading-s sf" id="loadMsg">Building your career protocol...</div>
+  <div class="wrap">
+
+    <div class="scr on" id="scr-intro">
+      <div class="intro">
+        <div class="eyebrow">Career Protocol</div>
+        <h1>The right path isn't found.<br>It's recognised.</h1>
+        <p class="intro-body">Ten questions. A personalised career intelligence report — your optimal sector, role
+          archetype, and the three moves to make right now.</p>
+        <div class="rule"></div>
+        <div class="intro-detail sf">10 questions &nbsp;·&nbsp; 4 minutes &nbsp;·&nbsp; Your result, privately delivered
+        </div>
+        <button class="btn btn-p" onclick="startQuiz()">Begin &rarr;</button>
+      </div>
     </div>
+
+    <div class="scr" id="scr-q">
+      <div class="qcard" id="qContent"></div>
+      <div class="nav">
+        <button class="btn btn-g" id="btnBack" onclick="goBack()">&larr; Back</button>
+        <button class="btn btn-p" id="btnNext" onclick="goNext()" disabled>Continue &rarr;</button>
+      </div>
+    </div>
+
+    <div class="scr" id="scr-email">
+      <div class="email-scr">
+        <div class="eyebrow">Almost there</div>
+        <h2>Where should we send your protocol?</h2>
+        <p>Your career report appears here instantly and arrives in your inbox.<br>No newsletters. No noise.</p>
+        <div class="email-row">
+          <input type="email" class="email-inp sf" id="emailInp" placeholder="your@email.com" oninput="chkEmail()">
+          <button class="btn btn-p" id="btnGen" onclick="generate()" disabled>Generate &rarr;</button>
+        </div>
+        <div class="err" id="emailErr">Please enter a valid email address.</div>
+        <p class="email-priv sf" style="margin-top:10px;">Your data stays yours. We never share or sell it.</p>
+      </div>
+    </div>
+
+    <div class="scr" id="scr-load">
+      <div class="loading">
+        <div class="spinner"></div>
+        <div class="loading-t">Reading your profile.</div>
+        <div class="loading-s sf" id="loadMsg">Building your career protocol...</div>
+      </div>
+    </div>
+
+    <div class="scr" id="scr-result">
+      <div class="result" id="resultContent"></div>
+    </div>
+
   </div>
 
-  <div class="scr" id="scr-result">
-    <div class="result" id="resultContent"></div>
-  </div>
+  <script>
+    // ── EmailJS config (public keys only — safe to commit) ──────
+    const EMAILJS_KEY = 'enqDYPOpz2FQvk_67';
+    const EMAILJS_SVC = 'service_xbuhjgq';
+    const EMAILJS_TPL_RESULT = 'template_d8pkz2j';
+    const EMAILJS_TPL_FEEDBACK = 'template_rn537v8';
+    const FEEDBACK_TO_EMAIL = 'antonio.grillo_balen@edu.escp.eu';
+    // No Anthropic key here — it lives in Vercel environment variables
 
-</div>
+    const Qs = [
+      {
+        phase: 'Phase I — Reality', num: '01',
+        text: 'Where are you in your ESCP journey right now?',
+        sub: 'This calibrates the urgency and timing of your action steps.',
+        type: 'opts',
+        opts: [
+          { l: 'First semester of Year 2 — early positioning', v: 'early_y2' },
+          { l: 'Second semester of Year 2 — internship season is now', v: 'late_y2' },
+          { l: 'Targeting this summer (3–6 month internship)', v: 'summer' },
+          { l: 'Planning a long-term placement or gap year', v: 'longterm' },
+        ]
+      },
+      {
+        phase: 'Phase I — Reality', num: '02',
+        text: 'Which languages can you work in professionally?',
+        sub: 'Not conversational — professionally. This opens or closes specific markets.',
+        type: 'opts',
+        opts: [
+          { l: 'English only', v: 'en' },
+          { l: 'English + French', v: 'en_fr' },
+          { l: 'English + French + one other', v: 'en_fr_plus' },
+          { l: 'Three or more at professional level', v: 'multilingual' },
+        ]
+      },
+      {
+        phase: 'Phase I — Reality', num: '03',
+        text: 'When you imagine a working day that genuinely suits you, which is more honest?',
+        sub: 'Not aspirational. What would actually sustain you for three years.',
+        type: 'opts',
+        opts: [
+          { l: 'Deep focus on one complex problem for hours', v: 'deep', s: 'Analysis, strategy, research' },
+          { l: 'Moving fast between people, meetings, decisions', v: 'fast', s: 'Operations, client-facing, deal flow' },
+          { l: 'Building something from a blank page', v: 'build', s: 'Entrepreneurship, product, creative' },
+          { l: 'Translating complexity into clarity for others', v: 'trans', s: 'Consulting, comms, advisory' },
+        ]
+      },
+      {
+        phase: 'Phase II — The Logic Gates', num: '04',
+        text: 'In the story of your career, are you the Author or the Protagonist?',
+        sub: 'The Author writes the plot. The Protagonist discovers it.',
+        type: 'opts',
+        opts: [
+          { l: 'The Author — I know what I\'m building toward', v: 'author', s: 'High direction, specific target' },
+          { l: 'The Protagonist — the path clarifies as I move', v: 'protagonist', s: 'Open to signal, adaptive' },
+        ]
+      },
+      {
+        phase: 'Phase II — The Logic Gates', num: '05',
+        text: 'When a plan falls apart, your autopilot is to —',
+        sub: 'Be honest. This shapes which environments you\'ll thrive in.',
+        type: 'opts',
+        opts: [
+          { l: 'Push harder. Rebuild the structure. Control the variables.', v: 'push', s: 'Over-function response' },
+          { l: 'Pull back. Wait for clarity. Let it settle before acting.', v: 'pull', s: 'Under-function response' },
+        ]
+      },
+      {
+        phase: 'Phase II — The Logic Gates', num: '06',
+        text: 'Which environment makes you sharper?',
+        sub: 'Where you do your best thinking — not where you think you should work.',
+        type: 'opts',
+        opts: [
+          { l: 'Silence — low stimulus, deep concentration', v: 'silence', s: 'Offices, research, focused solitude' },
+          { l: 'Energy — ambient noise, people nearby, movement', v: 'join', s: 'Trading floors, open plans, client sites' },
+        ]
+      },
+      {
+        phase: 'Phase III — The Depth', num: '07',
+        text: 'Which of these burdens do you most recognise in yourself?',
+        sub: 'Not who you admire. Who you understand from the inside.',
+        type: 'opts',
+        opts: [
+          { l: 'Batman — order imposed against chaos, by force of will', v: 'batman', s: 'Values structure, discipline, control' },
+          { l: 'Tony Stark — potential weaponised before it\'s ready', v: 'stark', s: 'Values intelligence, urgency, reinvention' },
+          { l: 'Hermione — preparation as armour against uncertainty', v: 'hermione', s: 'Values thoroughness, credibility, proof' },
+          { l: 'The Doctor — constantly moving to outrun what can\'t be fixed', v: 'doctor', s: 'Values curiosity, adaptability, depth' },
+        ]
+      },
+      {
+        phase: 'Phase III — The Depth', num: '08',
+        text: 'Growing up, the version of work modelled around you was closer to:',
+        sub: 'The environment that shaped your default relationship with professional life.',
+        type: 'opts',
+        opts: [
+          { l: 'The Mission — structured, purposeful, high standards', v: 'mission', s: 'Discipline, achievement, clear hierarchy' },
+          { l: 'The Mess — improvised, unpredictable, survival-mode', v: 'mess', s: 'Resilience, resourcefulness, discomfort with bureaucracy' },
+          { l: 'The Absence — work was rarely discussed or visible', v: 'absence', s: 'Self-directed, building your own blueprint' },
+          { l: 'The Passion — someone did what they loved', v: 'passion', s: 'Meaning-driven, identity tied to work' },
+        ]
+      },
+      {
+        phase: 'Phase III — The Depth', num: '09',
+        text: 'What is the one professional weight you\'d like to set down before you start?',
+        sub: 'The thing quietly consuming your background processing right now.',
+        type: 'text',
+        placeholder: 'e.g. I don\'t know which sector to choose / I feel behind my peers / I freeze when networking...'
+      },
+      {
+        phase: 'Phase III — The Depth', num: '10',
+        text: 'A year from now — what is one thing that will tell you this period mattered?',
+        sub: 'Not the job title. The evidence.',
+        type: 'text',
+        placeholder: 'e.g. I\'ll have signed an offer I actually want / I\'ll have built a real network in my target sector...'
+      },
+    ];
 
-<script>
-// ── EmailJS config (public keys only — safe to commit) ──────
-const EMAILJS_KEY = 'enqDYPOpz2FQvk_67';
-const EMAILJS_SVC = 'service_xbuhjgq';
-const EMAILJS_TPL_RESULT = 'template_d8pkz2j';
-const EMAILJS_TPL_FEEDBACK = 'template_rn537v8';
-const FEEDBACK_TO_EMAIL = 'antonio.grillo_balen@edu.escp.eu';
-// No Anthropic key here — it lives in Vercel environment variables
+    // ── EmailJS config (public keys only — safe to commit) ──────
+    const EMAILJS_KEY = 'enqDYPOpz2FQvk_67';
+    const EMAILJS_SVC = 'service_xbuhjgq';
+    const EMAILJS_TPL_RESULT = 'template_d8pkz2j';
+    const EMAILJS_TPL_FEEDBACK = 'template_rn537v8';
+    const FEEDBACK_TO_EMAIL = 'antonio.grillo_balen@edu.escp.eu';
 
-const Qs = [
-  {
-    phase:'Phase I — Reality',num:'01',
-    text:'Where are you in your ESCP journey right now?',
-    sub:'This calibrates the urgency and timing of your action steps.',
-    type:'opts',
-    opts:[
-      {l:'First semester of Year 2 — early positioning',v:'early_y2'},
-      {l:'Second semester of Year 2 — internship season is now',v:'late_y2'},
-      {l:'Targeting this summer (3–6 month internship)',v:'summer'},
-      {l:'Planning a long-term placement or gap year',v:'longterm'},
-    ]
-  },
-  {
-    phase:'Phase I — Reality',num:'02',
-    text:'Which languages can you work in professionally?',
-    sub:'Not conversational — professionally. This opens or closes specific markets.',
-    type:'opts',
-    opts:[
-      {l:'English only',v:'en'},
-      {l:'English + French',v:'en_fr'},
-      {l:'English + French + one other',v:'en_fr_plus'},
-      {l:'Three or more at professional level',v:'multilingual'},
-    ]
-  },
-  {
-    phase:'Phase I — Reality',num:'03',
-    text:'When you imagine a working day that genuinely suits you, which is more honest?',
-    sub:'Not aspirational. What would actually sustain you for three years.',
-    type:'opts',
-    opts:[
-      {l:'Deep focus on one complex problem for hours',v:'deep',s:'Analysis, strategy, research'},
-      {l:'Moving fast between people, meetings, decisions',v:'fast',s:'Operations, client-facing, deal flow'},
-      {l:'Building something from a blank page',v:'build',s:'Entrepreneurship, product, creative'},
-      {l:'Translating complexity into clarity for others',v:'trans',s:'Consulting, comms, advisory'},
-    ]
-  },
-  {
-    phase:'Phase II — The Logic Gates',num:'04',
-    text:'In the story of your career, are you the Author or the Protagonist?',
-    sub:'The Author writes the plot. The Protagonist discovers it.',
-    type:'opts',
-    opts:[
-      {l:'The Author — I know what I\'m building toward',v:'author',s:'High direction, specific target'},
-      {l:'The Protagonist — the path clarifies as I move',v:'protagonist',s:'Open to signal, adaptive'},
-    ]
-  },
-  {
-    phase:'Phase II — The Logic Gates',num:'05',
-    text:'When a plan falls apart, your autopilot is to —',
-    sub:'Be honest. This shapes which environments you\'ll thrive in.',
-    type:'opts',
-    opts:[
-      {l:'Push harder. Rebuild the structure. Control the variables.',v:'push',s:'Over-function response'},
-      {l:'Pull back. Wait for clarity. Let it settle before acting.',v:'pull',s:'Under-function response'},
-    ]
-  },
-  {
-    phase:'Phase II — The Logic Gates',num:'06',
-    text:'Which environment makes you sharper?',
-    sub:'Where you do your best thinking — not where you think you should work.',
-    type:'opts',
-    opts:[
-      {l:'Silence — low stimulus, deep concentration',v:'silence',s:'Offices, research, focused solitude'},
-      {l:'Energy — ambient noise, people nearby, movement',v:'join',s:'Trading floors, open plans, client sites'},
-    ]
-  },
-  {
-    phase:'Phase III — The Depth',num:'07',
-    text:'Which of these burdens do you most recognise in yourself?',
-    sub:'Not who you admire. Who you understand from the inside.',
-    type:'opts',
-    opts:[
-      {l:'Batman — order imposed against chaos, by force of will',v:'batman',s:'Values structure, discipline, control'},
-      {l:'Tony Stark — potential weaponised before it\'s ready',v:'stark',s:'Values intelligence, urgency, reinvention'},
-      {l:'Hermione — preparation as armour against uncertainty',v:'hermione',s:'Values thoroughness, credibility, proof'},
-      {l:'The Doctor — constantly moving to outrun what can\'t be fixed',v:'doctor',s:'Values curiosity, adaptability, depth'},
-    ]
-  },
-  {
-    phase:'Phase III — The Depth',num:'08',
-    text:'Growing up, the version of work modelled around you was closer to:',
-    sub:'The environment that shaped your default relationship with professional life.',
-    type:'opts',
-    opts:[
-      {l:'The Mission — structured, purposeful, high standards',v:'mission',s:'Discipline, achievement, clear hierarchy'},
-      {l:'The Mess — improvised, unpredictable, survival-mode',v:'mess',s:'Resilience, resourcefulness, discomfort with bureaucracy'},
-      {l:'The Absence — work was rarely discussed or visible',v:'absence',s:'Self-directed, building your own blueprint'},
-      {l:'The Passion — someone did what they loved',v:'passion',s:'Meaning-driven, identity tied to work'},
-    ]
-  },
-  {
-    phase:'Phase III — The Depth',num:'09',
-    text:'What is the one professional weight you\'d like to set down before you start?',
-    sub:'The thing quietly consuming your background processing right now.',
-    type:'text',
-    placeholder:'e.g. I don\'t know which sector to choose / I feel behind my peers / I freeze when networking...'
-  },
-  {
-    phase:'Phase III — The Depth',num:'10',
-    text:'A year from now — what is one thing that will tell you this period mattered?',
-    sub:'Not the job title. The evidence.',
-    type:'text',
-    placeholder:'e.g. I\'ll have signed an offer I actually want / I\'ll have built a real network in my target sector...'
-  },
-];
+    let cur = 0;
+    const ans = {};
+    let userEmail = '';
 
-let cur = 0;
-const ans = {};
-let userEmail = '';
+    function show(id) {
+      document.querySelectorAll('.scr').forEach(s => s.classList.remove('on'));
+      document.getElementById('scr-' + id).classList.add('on');
+    }
 
-function show(id) {
-  document.querySelectorAll('.scr').forEach(s => s.classList.remove('on'));
-  document.getElementById('scr-' + id).classList.add('on');
-}
+    function startQuiz() {
+      document.getElementById('progWrap').style.display = 'block';
+      cur = 0; renderQ(); show('q');
+    }
 
-function startQuiz() {
-  document.getElementById('progWrap').style.display = 'block';
-  cur = 0; renderQ(); show('q');
-}
+    function renderQ() {
+      const q = Qs[cur];
+      const pct = Math.round((cur / Qs.length) * 100);
+      document.getElementById('progFill').style.width = pct + '%';
+      document.getElementById('progLbl').textContent = (cur + 1) + ' / ' + Qs.length;
+      document.getElementById('btnBack').style.visibility = cur === 0 ? 'hidden' : 'visible';
 
-function renderQ() {
-  const q = Qs[cur];
-  const pct = Math.round((cur / Qs.length) * 100);
-  document.getElementById('progFill').style.width = pct + '%';
-  document.getElementById('progLbl').textContent = (cur + 1) + ' / ' + Qs.length;
-  document.getElementById('btnBack').style.visibility = cur === 0 ? 'hidden' : 'visible';
-
-  let html = `
+      let html = `
     <div class="q-phase sf">${q.phase}</div>
     <div class="q-num sf">Question ${q.num}</div>
     <div class="q-text">${q.text}</div>
     <div class="q-sub sf">${q.sub}</div>`;
 
-  if (q.type === 'opts') {
-    html += '<div class="opts">';
-    q.opts.forEach((o, i) => {
-      const sel = ans[cur] === o.v ? ' sel' : '';
-      html += `<div class="opt${sel}" onclick="pick(${i})">
+      if (q.type === 'opts') {
+        html += '<div class="opts">';
+        q.opts.forEach((o, i) => {
+          const sel = ans[cur] === o.v ? ' sel' : '';
+          html += `<div class="opt${sel}" onclick="pick(${i})">
         <div class="dot"><div class="dot-i"></div></div>
         <div>
           <div class="opt-lbl sf">${o.l}</div>
           ${o.s ? `<div class="opt-sub sf">${o.s}</div>` : ''}
         </div>
       </div>`;
-    });
-    html += '</div>';
-  } else {
-    const val = ans[cur] || '';
-    html += `<textarea class="tinput sf" id="tInput" rows="3"
+        });
+        html += '</div>';
+      } else {
+        const val = ans[cur] || '';
+        html += `<textarea class="tinput sf" id="tInput" rows="3"
       placeholder="${q.placeholder}"
       oninput="onText(this.value)">${val}</textarea>`;
-  }
+      }
 
-  document.getElementById('qContent').innerHTML = html;
-  document.getElementById('btnNext').disabled = !ans[cur];
-}
-
-function pick(i) {
-  ans[cur] = Qs[cur].opts[i].v;
-  document.querySelectorAll('.opt').forEach((el, idx) => el.classList.toggle('sel', idx === i));
-  document.getElementById('btnNext').disabled = false;
-}
-
-function onText(v) {
-  ans[cur] = v.trim();
-  document.getElementById('btnNext').disabled = ans[cur].length < 3;
-}
-
-function goNext() {
-  if (cur < Qs.length - 1) { cur++; renderQ(); }
-  else { show('email'); document.getElementById('progWrap').style.display = 'none'; }
-}
-
-function goBack() {
-  if (cur > 0) { cur--; renderQ(); }
-  else { show('intro'); document.getElementById('progWrap').style.display = 'none'; }
-}
-
-function chkEmail() {
-  const v = document.getElementById('emailInp').value;
-  const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
-  document.getElementById('btnGen').disabled = !ok;
-  document.getElementById('emailErr').style.display = ok ? 'none' : 'block';
-  userEmail = ok ? v : '';
-}
-
-const LOAD_MSGS = [
-  'Mapping your archetype...',
-  'Identifying your sector alignment...',
-  'Building your action sequence...',
-  'Calibrating the protocol...',
-];
-let loadIdx = 0, loadTimer;
-function cycleLoad() {
-  loadIdx = (loadIdx + 1) % LOAD_MSGS.length;
-  document.getElementById('loadMsg').textContent = LOAD_MSGS[loadIdx];
-}
-
-function buildPrompt() {
-  const labels = {
-    0:'Current ESCP stage', 1:'Professional languages',
-    2:'Ideal working day', 3:'Author vs Protagonist (locus of control)',
-    4:'Stress response — Push vs Pull', 5:'Focus environment',
-    6:'Hero burden archetype', 7:'Childhood work model',
-    8:'Current professional weight (The Weight)',
-    9:'One-year success evidence (Identity Anchor)',
-  };
-  const lines = Qs.map((q, i) => {
-    let v = ans[i] || 'Not answered';
-    if (q.type === 'opts' && q.opts) {
-      const f = q.opts.find(o => o.v === v);
-      if (f) v = f.l;
+      document.getElementById('qContent').innerHTML = html;
+      document.getElementById('btnNext').disabled = !ans[cur];
     }
-    return `${labels[i]}: ${v}`;
-  }).join('\n');
 
-  return `You are the Solis Career Intelligence Engine. You generate a single, named career protocol for one ESCP second-year bachelor in management student. You are not a career counsellor. You are a precision instrument that reads a person's current state and orientation, then delivers a specific protocol: the right sector, the right role type, and the three moves to make immediately.
+    function pick(i) {
+      ans[cur] = Qs[cur].opts[i].v;
+      document.querySelectorAll('.opt').forEach((el, idx) => el.classList.toggle('sel', idx === i));
+      document.getElementById('btnNext').disabled = false;
+    }
+
+    function onText(v) {
+      ans[cur] = v.trim();
+      document.getElementById('btnNext').disabled = ans[cur].length < 3;
+    }
+
+    function goNext() {
+      if (cur < Qs.length - 1) { cur++; renderQ(); }
+      else { show('email'); document.getElementById('progWrap').style.display = 'none'; }
+    }
+
+    function goBack() {
+      if (cur > 0) { cur--; renderQ(); }
+      else { show('intro'); document.getElementById('progWrap').style.display = 'none'; }
+    }
+
+    function chkEmail() {
+      const v = document.getElementById('emailInp').value;
+      const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+      document.getElementById('btnGen').disabled = !ok;
+      document.getElementById('emailErr').style.display = ok ? 'none' : 'block';
+      userEmail = ok ? v : '';
+    }
+
+    const LOAD_MSGS = [
+      'Mapping your archetype...',
+      'Identifying your sector alignment...',
+      'Building your action sequence...',
+      'Calibrating the protocol...',
+    ];
+    let loadIdx = 0, loadTimer;
+    function cycleLoad() {
+      loadIdx = (loadIdx + 1) % LOAD_MSGS.length;
+      document.getElementById('loadMsg').textContent = LOAD_MSGS[loadIdx];
+    }
+
+    function buildPrompt() {
+      const labels = {
+        0: 'Current ESCP stage', 1: 'Professional languages',
+        2: 'Ideal working day', 3: 'Author vs Protagonist (locus of control)',
+        4: 'Stress response — Push vs Pull', 5: 'Focus environment',
+        6: 'Hero burden archetype', 7: 'Childhood work model',
+        8: 'Current professional weight (The Weight)',
+        9: 'One-year success evidence (Identity Anchor)',
+      };
+      const lines = Qs.map((q, i) => {
+        let v = ans[i] || 'Not answered';
+        if (q.type === 'opts' && q.opts) {
+          const f = q.opts.find(o => o.v === v);
+          if (f) v = f.l;
+        }
+        return `${labels[i]}: ${v}`;
+      }).join('\n');
+
+      return `You are the Solis Career Intelligence Engine. You generate a single, named career protocol for one ESCP second-year bachelor in management student. You are not a career counsellor. You are a precision instrument that reads a person's current state and orientation, then delivers a specific protocol: the right sector, the right role type, and the three moves to make immediately.
 
 STUDENT PROFILE:
 ${lines}
@@ -438,62 +1036,62 @@ CONTENT RULES:
 - anti_pattern names the pattern this protocol interrupts (1 sentence).
 - final_line is 1 sentence, not a summary.
 `;
-}
+    }
 
-async function generate() {
-  const email = document.getElementById('emailInp').value.trim();
-  if (!email) return;
-  userEmail = email;
-  show('load');
-  loadIdx = 0;
-  document.getElementById('loadMsg').textContent = LOAD_MSGS[0];
-  loadTimer = setInterval(cycleLoad, 1800);
+    async function generate() {
+      const email = document.getElementById('emailInp').value.trim();
+      if (!email) return;
+      userEmail = email;
+      show('load');
+      loadIdx = 0;
+      document.getElementById('loadMsg').textContent = LOAD_MSGS[0];
+      loadTimer = setInterval(cycleLoad, 1800);
 
-  try {
-    // Calls our Vercel serverless proxy — no API key in browser
-    const resp = await fetch('/api/generate', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ prompt: buildPrompt() }),
-    });
+      try {
+        // Calls our Vercel serverless proxy — no API key in browser
+        const resp = await fetch('/api/generate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ prompt: buildPrompt() }),
+        });
 
-    const data = await resp.json();
-    clearInterval(loadTimer);
+        const data = await resp.json();
+        clearInterval(loadTimer);
 
-    if (!resp.ok) throw new Error(data.error || 'Generation failed');
-    if (!data.result) throw new Error(data.parse_error || 'Model did not return structured output');
+        if (!resp.ok) throw new Error(data.error || 'Generation failed');
+        if (!data.result) throw new Error(data.parse_error || 'Model did not return structured output');
 
-    renderResult(data.result);
-    sendResultEmail(data.result);
-    sendFeedbackRequestEmail();
+        renderResult(data.result);
+        sendResultEmail(data.result);
+        sendFeedbackRequestEmail();
 
-  } catch (e) {
-    clearInterval(loadTimer);
-    renderError(e.message);
-  }
-}
+      } catch (e) {
+        clearInterval(loadTimer);
+        renderError(e.message);
+      }
+    }
 
-function escapeHtml(s) {
-  return String(s ?? '')
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#039;');
-}
+    function escapeHtml(s) {
+      return String(s ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
 
-function renderResult(r) {
-  const moves = Array.isArray(r?.career_protocol) ? r.career_protocol : [];
-  const roles = Array.isArray(r?.fit_roles) ? r.fit_roles : [];
+    function renderResult(r) {
+      const moves = Array.isArray(r?.career_protocol) ? r.career_protocol : [];
+      const roles = Array.isArray(r?.fit_roles) ? r.fit_roles : [];
 
-  const movesHTML = moves.slice(0,3).map((m,i) => `
+      const movesHTML = moves.slice(0, 3).map((m, i) => `
     <div class="act-card">
-      <div class="act-n sf">Move ${i+1}</div>
-      <div class="act-t sf">${escapeHtml(m?.title || ('Action ' + (i+1)))}</div>
+      <div class="act-n sf">Move ${i + 1}</div>
+      <div class="act-t sf">${escapeHtml(m?.title || ('Action ' + (i + 1)))}</div>
       <div class="act-b sf">${escapeHtml(m?.body || '')}</div>
     </div>`).join('') || `<div class="res-body">${escapeHtml(JSON.stringify(r ?? {}, null, 2))}</div>`;
 
-  document.getElementById('resultContent').innerHTML = `
+      document.getElementById('resultContent').innerHTML = `
     <div class="res-hdr">
       <div class="res-eye">Your Career Protocol</div>
       <div class="res-arch">${escapeHtml(r?.protocol_name || 'Your Protocol')}</div>
@@ -556,7 +1154,7 @@ function renderResult(r) {
         <div class="fb-qlbl sf">How well did the questions capture who you actually are?</div>
         <div class="fb-qlbl-sub sf">Question quality &amp; psychological depth</div>
         <div class="stars" id="stars-q1">
-          ${[1,2,3,4,5].map(n=>`<span class="star" onclick="rateStar('q1',${n})" data-n="${n}">&#9733;</span>`).join('')}
+          ${[1, 2, 3, 4, 5].map(n => `<span class="star" onclick="rateStar('q1',${n})" data-n="${n}">&#9733;</span>`).join('')}
         </div>
       </div>
 
@@ -564,7 +1162,7 @@ function renderResult(r) {
         <div class="fb-qlbl sf">How accurate was your career alignment — sector, role, and action steps?</div>
         <div class="fb-qlbl-sub sf">Output precision &amp; career relevance</div>
         <div class="stars" id="stars-q2">
-          ${[1,2,3,4,5].map(n=>`<span class="star" onclick="rateStar('q2',${n})" data-n="${n}">&#9733;</span>`).join('')}
+          ${[1, 2, 3, 4, 5].map(n => `<span class="star" onclick="rateStar('q2',${n})" data-n="${n}">&#9733;</span>`).join('')}
         </div>
       </div>
 
@@ -580,115 +1178,116 @@ function renderResult(r) {
       <div class="fb-sent sf" id="fbSent">&#10003;&nbsp; Received. Thank you &mdash; this shapes what comes next.</div>
     </div>`;
 
-  show('result');
-  window.scrollTo(0, 0);
-}
+      show('result');
+      window.scrollTo(0, 0);
+    }
 
-function renderError(msg) {
-  document.getElementById('resultContent').innerHTML = `
+    function renderError(msg) {
+      document.getElementById('resultContent').innerHTML = `
     <div class="result" style="text-align:center;padding:60px 0;">
       <div class="res-eye">Something went wrong</div>
       <div class="res-arch" style="font-size:20px;margin-bottom:12px;">Generation failed</div>
-      <div class="sf" style="font-size:13px;color:var(--muted);margin-bottom:28px;">${msg||'Please try again.'}</div>
+      <div class="sf" style="font-size:13px;color:var(--muted);margin-bottom:28px;">${msg || 'Please try again.'}</div>
       <button class="btn btn-p" onclick="show('email')">&larr; Try again</button>
     </div>`;
-  show('result');
-}
+      show('result');
+    }
 
-function composeResultEmailText(r) {
-  const roles = Array.isArray(r?.fit_roles) ? r.fit_roles : [];
-  const moves = Array.isArray(r?.career_protocol) ? r.career_protocol : [];
-  const lines = [];
-  lines.push(r?.protocol_name ? r.protocol_name : 'Your Solis Career Protocol');
-  if (r?.career_archetype) lines.push(`\nCareer archetype: ${r.career_archetype}`);
-  if (r?.anti_pattern) lines.push(`\nPattern to interrupt:\n${r.anti_pattern}`);
-  if (r?.fit_summary) lines.push(`\nFit summary:\n${r.fit_summary}`);
-  if (roles.length) lines.push(`\nFit roles:\n- ${roles.join('\n- ')}`);
-  if (moves.length) {
-    lines.push(`\nThree moves:`);
-    moves.slice(0, 3).forEach((m, i) => {
-      lines.push(`\nMove ${i + 1}: ${m?.title || ''}\n${m?.body || ''}`.trim());
-    });
-  }
-  if (r?.linkedin_outreach) lines.push(`\nLinkedIn outreach:\n${r.linkedin_outreach}`);
-  if (r?.timing_note) lines.push(`\nTiming note:\n${r.timing_note}`);
-  if (r?.final_line) lines.push(`\nFinal line:\n${r.final_line}`);
-  return lines.join('\n');
-}
+    function composeResultEmailText(r) {
+      const roles = Array.isArray(r?.fit_roles) ? r.fit_roles : [];
+      const moves = Array.isArray(r?.career_protocol) ? r.career_protocol : [];
+      const lines = [];
+      lines.push(r?.protocol_name ? r.protocol_name : 'Your Solis Career Protocol');
+      if (r?.career_archetype) lines.push(`\nCareer archetype: ${r.career_archetype}`);
+      if (r?.anti_pattern) lines.push(`\nPattern to interrupt:\n${r.anti_pattern}`);
+      if (r?.fit_summary) lines.push(`\nFit summary:\n${r.fit_summary}`);
+      if (roles.length) lines.push(`\nFit roles:\n- ${roles.join('\n- ')}`);
+      if (moves.length) {
+        lines.push(`\nThree moves:`);
+        moves.slice(0, 3).forEach((m, i) => {
+          lines.push(`\nMove ${i + 1}: ${m?.title || ''}\n${m?.body || ''}`.trim());
+        });
+      }
+      if (r?.linkedin_outreach) lines.push(`\nLinkedIn outreach:\n${r.linkedin_outreach}`);
+      if (r?.timing_note) lines.push(`\nTiming note:\n${r.timing_note}`);
+      if (r?.final_line) lines.push(`\nFinal line:\n${r.final_line}`);
+      return lines.join('\n');
+    }
 
-function deriveName(email) {
-  // Derive a readable name from email: antonio.grillo_balen@... → "antonio grillo balen"
-  const local = (email || '').split('@')[0].replace(/[._-]/g, ' ');
-  return local.charAt(0).toUpperCase() + local.slice(1);
-}
+    function deriveName(email) {
+      // Derive a readable name from email: antonio.grillo_balen@... → "antonio grillo balen"
+      const local = (email || '').split('@')[0].replace(/[._-]/g, ' ');
+      return local.charAt(0).toUpperCase() + local.slice(1);
+    }
 
-function sendResultEmail(r) {
-  if (!EMAILJS_KEY || EMAILJS_KEY === 'YOUR_EMAILJS_PUBLIC_KEY') return;
-  const roles = Array.isArray(r?.fit_roles) ? r.fit_roles : [];
-  const moves = Array.isArray(r?.career_protocol) ? r.career_protocol : [];
-  try {
-    emailjs.send(EMAILJS_SVC, EMAILJS_TPL_RESULT, {
-      to_email: userEmail,
-      reply_to: FEEDBACK_TO_EMAIL,
-      name: deriveName(userEmail),
-      time: '',
-      career_archetype: r?.career_archetype || '',
-      fit_summary: r?.fit_summary || '',
-      fit_roles: roles.map(x => `• ${x}`).join('\n'),
-      career_protocol: moves.slice(0, 3).map((m, i) =>
-        `Move ${i + 1}: ${m?.title || ''}\n${m?.body || ''}`
-      ).join('\n\n'),
-      linkedin_outreach: r?.linkedin_outreach || '',
-      timing_note: r?.timing_note || '',
-      anti_pattern: r?.anti_pattern || '',
-    });
-  } catch(e) { console.log('Result email error:', e); }
-}
+    function sendResultEmail(r) {
+      if (!EMAILJS_KEY || EMAILJS_KEY === 'YOUR_EMAILJS_PUBLIC_KEY') return;
+      const roles = Array.isArray(r?.fit_roles) ? r.fit_roles : [];
+      const moves = Array.isArray(r?.career_protocol) ? r.career_protocol : [];
+      try {
+        emailjs.send(EMAILJS_SVC, EMAILJS_TPL_RESULT, {
+          to_email: userEmail,
+          reply_to: FEEDBACK_TO_EMAIL,
+          name: deriveName(userEmail),
+          time: '',
+          career_archetype: r?.career_archetype || '',
+          fit_summary: r?.fit_summary || '',
+          fit_roles: roles.map(x => `• ${x}`).join('\n'),
+          career_protocol: moves.slice(0, 3).map((m, i) =>
+            `Move ${i + 1}: ${m?.title || ''}\n${m?.body || ''}`
+          ).join('\n\n'),
+          linkedin_outreach: r?.linkedin_outreach || '',
+          timing_note: r?.timing_note || '',
+          anti_pattern: r?.anti_pattern || '',
+        });
+      } catch (e) { console.log('Result email error:', e); }
+    }
 
-function sendFeedbackRequestEmail() {
-  if (!EMAILJS_KEY || EMAILJS_KEY === 'YOUR_EMAILJS_PUBLIC_KEY') return;
-  try {
-    emailjs.send(EMAILJS_SVC, EMAILJS_TPL_FEEDBACK, {
-      to_email: userEmail,
-      reply_to: FEEDBACK_TO_EMAIL,
-      name: deriveName(userEmail),
-    });
-  } catch(e) { console.log('Feedback request email error:', e); }
-}
+    function sendFeedbackRequestEmail() {
+      if (!EMAILJS_KEY || EMAILJS_KEY === 'YOUR_EMAILJS_PUBLIC_KEY') return;
+      try {
+        emailjs.send(EMAILJS_SVC, EMAILJS_TPL_FEEDBACK, {
+          to_email: userEmail,
+          reply_to: FEEDBACK_TO_EMAIL,
+          name: deriveName(userEmail),
+        });
+      } catch (e) { console.log('Feedback request email error:', e); }
+    }
 
-const fbState = { q1:0, q2:0, open:'' };
+    const fbState = { q1: 0, q2: 0, open: '' };
 
-function rateStar(qId, n) {
-  fbState[qId] = n;
-  const c = document.getElementById('stars-' + qId);
-  if (!c) return;
-  c.querySelectorAll('.star').forEach(s => s.classList.toggle('lit', parseInt(s.dataset.n) <= n));
-}
+    function rateStar(qId, n) {
+      fbState[qId] = n;
+      const c = document.getElementById('stars-' + qId);
+      if (!c) return;
+      c.querySelectorAll('.star').forEach(s => s.classList.toggle('lit', parseInt(s.dataset.n) <= n));
+    }
 
-function submitFeedback() {
-  // In-app ratings logged; detailed feedback collected via Google Form in the email.
-  const btn = document.getElementById('fbBtn');
-  btn.disabled = true; btn.textContent = 'Sending...';
-  console.log('Feedback captured:', {
-    email: userEmail,
-    questionQuality: fbState.q1,
-    careerAccuracy: fbState.q2,
-    openFeedback: fbState.open,
-    timestamp: new Date().toISOString(),
-  });
-  setTimeout(() => {
-    btn.style.display = 'none';
-    document.getElementById('fbSent').style.display = 'block';
-  }, 350);
-}
+    function submitFeedback() {
+      // In-app ratings logged; detailed feedback collected via Google Form in the email.
+      const btn = document.getElementById('fbBtn');
+      btn.disabled = true; btn.textContent = 'Sending...';
+      console.log('Feedback captured:', {
+        email: userEmail,
+        questionQuality: fbState.q1,
+        careerAccuracy: fbState.q2,
+        openFeedback: fbState.open,
+        timestamp: new Date().toISOString(),
+      });
+      setTimeout(() => {
+        btn.style.display = 'none';
+        document.getElementById('fbSent').style.display = 'block';
+      }, 350);
+    }
 
-// Load EmailJS
-(function(){
-  const s = document.createElement('script');
-  s.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js';
-  s.onload = () => { if(EMAILJS_KEY !== 'YOUR_EMAILJS_PUBLIC_KEY') emailjs.init(EMAILJS_KEY); };
-  document.head.appendChild(s);
-})();
-</script>
+    // Load EmailJS
+    (function () {
+      const s = document.createElement('script');
+      s.src = 'https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js';
+      s.onload = () => { if (EMAILJS_KEY !== 'YOUR_EMAILJS_PUBLIC_KEY') emailjs.init(EMAILJS_KEY); };
+      document.head.appendChild(s);
+    })();
+  </script>
 </body>
+
 </html>
