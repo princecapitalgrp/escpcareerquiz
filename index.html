@@ -169,11 +169,11 @@ body{font-family:Georgia,serif;background:var(--cream);color:var(--text);min-hei
 
 <script>
 // ── EmailJS config (public keys only — safe to commit) ──────
-const EMAILJS_KEY = 'YOUR_EMAILJS_PUBLIC_KEY';
-const EMAILJS_SVC = 'YOUR_EMAILJS_SERVICE_ID';
-const EMAILJS_TPL_RESULT = 'YOUR_EMAILJS_RESULT_TEMPLATE_ID';
-const EMAILJS_TPL_FEEDBACK = 'YOUR_EMAILJS_FEEDBACK_TEMPLATE_ID';
-const FEEDBACK_TO_EMAIL = 'YOUR_INBOX_EMAIL';
+const EMAILJS_KEY = 'enqDYPOpz2FQvk_67';
+const EMAILJS_SVC = 'service_xbuhjgq';
+const EMAILJS_TPL_RESULT = 'template_d8pkz2j';
+const EMAILJS_TPL_FEEDBACK = 'template_rn537v8';
+const FEEDBACK_TO_EMAIL = 'antonio.grillo_balen@edu.escp.eu';
 // No Anthropic key here — it lives in Vercel environment variables
 
 const Qs = [
@@ -465,6 +465,7 @@ async function generate() {
 
     renderResult(data.result);
     sendResultEmail(data.result);
+    sendFeedbackRequestEmail();
 
   } catch (e) {
     clearInterval(loadTimer);
@@ -615,16 +616,44 @@ function composeResultEmailText(r) {
   return lines.join('\n');
 }
 
+function deriveName(email) {
+  // Derive a readable name from email: antonio.grillo_balen@... → "antonio grillo balen"
+  const local = (email || '').split('@')[0].replace(/[._-]/g, ' ');
+  return local.charAt(0).toUpperCase() + local.slice(1);
+}
+
 function sendResultEmail(r) {
   if (!EMAILJS_KEY || EMAILJS_KEY === 'YOUR_EMAILJS_PUBLIC_KEY') return;
+  const roles = Array.isArray(r?.fit_roles) ? r.fit_roles : [];
+  const moves = Array.isArray(r?.career_protocol) ? r.career_protocol : [];
   try {
     emailjs.send(EMAILJS_SVC, EMAILJS_TPL_RESULT, {
       to_email: userEmail,
-      reply_to: userEmail,
-      result_text: composeResultEmailText(r),
-      subject: 'Your Solis Career Protocol',
+      reply_to: FEEDBACK_TO_EMAIL,
+      name: deriveName(userEmail),
+      time: '',
+      career_archetype: r?.career_archetype || '',
+      fit_summary: r?.fit_summary || '',
+      fit_roles: roles.map(x => `• ${x}`).join('\n'),
+      career_protocol: moves.slice(0, 3).map((m, i) =>
+        `Move ${i + 1}: ${m?.title || ''}\n${m?.body || ''}`
+      ).join('\n\n'),
+      linkedin_outreach: r?.linkedin_outreach || '',
+      timing_note: r?.timing_note || '',
+      anti_pattern: r?.anti_pattern || '',
     });
-  } catch(e) { console.log('Email:', e); }
+  } catch(e) { console.log('Result email error:', e); }
+}
+
+function sendFeedbackRequestEmail() {
+  if (!EMAILJS_KEY || EMAILJS_KEY === 'YOUR_EMAILJS_PUBLIC_KEY') return;
+  try {
+    emailjs.send(EMAILJS_SVC, EMAILJS_TPL_FEEDBACK, {
+      to_email: userEmail,
+      reply_to: FEEDBACK_TO_EMAIL,
+      name: deriveName(userEmail),
+    });
+  } catch(e) { console.log('Feedback request email error:', e); }
 }
 
 const fbState = { q1:0, q2:0, open:'' };
@@ -637,41 +666,20 @@ function rateStar(qId, n) {
 }
 
 function submitFeedback() {
+  // In-app ratings logged; detailed feedback collected via Google Form in the email.
   const btn = document.getElementById('fbBtn');
   btn.disabled = true; btn.textContent = 'Sending...';
-  const payload = {
+  console.log('Feedback captured:', {
     email: userEmail,
     questionQuality: fbState.q1,
     careerAccuracy: fbState.q2,
     openFeedback: fbState.open,
     timestamp: new Date().toISOString(),
-  };
-
-  if (!EMAILJS_KEY || EMAILJS_KEY === 'YOUR_EMAILJS_PUBLIC_KEY') {
-    setTimeout(() => {
-      btn.style.display = 'none';
-      document.getElementById('fbSent').style.display = 'block';
-    }, 250);
-    return;
-  }
-
-  emailjs.send(EMAILJS_SVC, EMAILJS_TPL_FEEDBACK, {
-    to_email: FEEDBACK_TO_EMAIL,
-    reply_to: userEmail || FEEDBACK_TO_EMAIL,
-    from_email: userEmail || '',
-    question_quality: String(payload.questionQuality || ''),
-    career_accuracy: String(payload.careerAccuracy || ''),
-    open_feedback: payload.openFeedback || '',
-    timestamp: payload.timestamp,
-    subject: 'Solis quiz feedback',
-  }).then(() => {
+  });
+  setTimeout(() => {
     btn.style.display = 'none';
     document.getElementById('fbSent').style.display = 'block';
-  }).catch((e) => {
-    btn.disabled = false; btn.textContent = 'Send feedback →';
-    alert('Feedback failed to send. Please try again.');
-    console.log('Feedback email error', e);
-  });
+  }, 350);
 }
 
 // Load EmailJS
