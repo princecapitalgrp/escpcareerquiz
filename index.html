@@ -759,6 +759,41 @@
   </div>
 
   <script>
+    // #region agent log
+    const __dbg = (hypothesisId, message, data) => {
+      try {
+        fetch('http://127.0.0.1:7757/ingest/b7743389-87c0-47df-aea0-42c35460664d', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'X-Debug-Session-Id': 'b84d84' },
+          body: JSON.stringify({
+            sessionId: 'b84d84',
+            runId: 'begin-broken-pre',
+            hypothesisId,
+            location: 'index.html:script',
+            message,
+            data,
+            timestamp: Date.now()
+          })
+        }).catch(() => {});
+      } catch { /* noop */ }
+    };
+
+    window.addEventListener('error', (e) => {
+      __dbg('H_begin_1_parse_or_runtime', 'window.error', {
+        message: e?.message,
+        filename: e?.filename,
+        lineno: e?.lineno,
+        colno: e?.colno
+      });
+    });
+    window.addEventListener('unhandledrejection', (e) => {
+      __dbg('H_begin_1_parse_or_runtime', 'unhandledrejection', {
+        reason: String(e?.reason?.message || e?.reason || '')
+      });
+    });
+    __dbg('H_begin_2_script_loaded', 'script tag entered', { ua: navigator.userAgent });
+    // #endregion agent log
+
     // ── EmailJS config (public keys only — safe to commit) ──────
     const EMAILJS_KEY = 'enqDYPOpz2FQvk_67';
     const EMAILJS_SVC = 'service_xbuhjgq';
@@ -894,6 +929,24 @@
       document.getElementById('progWrap').style.display = 'block';
       cur = 0; renderQ(); show('q');
     }
+
+    // #region agent log
+    window.startQuiz = startQuiz;
+    document.addEventListener('DOMContentLoaded', () => {
+      const btn = document.querySelector('button[onclick="startQuiz()"]');
+      __dbg('H_begin_3_startQuiz_global', 'dom ready', {
+        hasWindowStartQuiz: typeof window.startQuiz === 'function',
+        beginButtonFound: !!btn
+      });
+      if (btn) {
+        btn.addEventListener('click', () => {
+          __dbg('H_begin_4_begin_clicked', 'begin clicked', {
+            hasWindowStartQuiz: typeof window.startQuiz === 'function'
+          });
+        });
+      }
+    });
+    // #endregion agent log
 
     function renderQ() {
       const q = Qs[cur];
@@ -1225,8 +1278,14 @@ CONTENT RULES:
       const roles = Array.isArray(r?.fit_roles) ? r.fit_roles : [];
       const moves = Array.isArray(r?.career_protocol) ? r.career_protocol : [];
       try {
+        const resultText = composeResultEmailText(r);
         emailjs.send(EMAILJS_SVC, EMAILJS_TPL_RESULT, {
+          // Common template vars (per README)
+          subject: 'Your Rise by Solis career protocol',
+          result_text: resultText,
           to_email: userEmail,
+
+          // Existing/extra vars (safe if template ignores them)
           reply_to: FEEDBACK_TO_EMAIL,
           name: deriveName(userEmail),
           time: '',
@@ -1246,10 +1305,18 @@ CONTENT RULES:
     function sendFeedbackRequestEmail() {
       if (!EMAILJS_KEY || EMAILJS_KEY === 'YOUR_EMAILJS_PUBLIC_KEY') return;
       try {
+        // Optional: send a short "thanks + feedback prompt" to the user.
+        // This is NOT the feedback submission itself (that is handled in submitFeedback()).
         emailjs.send(EMAILJS_SVC, EMAILJS_TPL_FEEDBACK, {
           to_email: userEmail,
           reply_to: FEEDBACK_TO_EMAIL,
           name: deriveName(userEmail),
+          subject: 'Quick feedback (30 seconds)',
+          from_email: userEmail,
+          question_quality: '',
+          career_accuracy: '',
+          open_feedback: '',
+          timestamp: new Date().toISOString(),
         });
       } catch (e) { console.log('Feedback request email error:', e); }
     }
@@ -1263,21 +1330,37 @@ CONTENT RULES:
       c.querySelectorAll('.star').forEach(s => s.classList.toggle('lit', parseInt(s.dataset.n) <= n));
     }
 
-    function submitFeedback() {
-      // In-app ratings logged; detailed feedback collected via Google Form in the email.
+    async function submitFeedback() {
       const btn = document.getElementById('fbBtn');
       btn.disabled = true; btn.textContent = 'Sending...';
-      console.log('Feedback captured:', {
-        email: userEmail,
-        questionQuality: fbState.q1,
-        careerAccuracy: fbState.q2,
-        openFeedback: fbState.open,
+      const payload = {
+        // Per README feedback template vars
+        to_email: FEEDBACK_TO_EMAIL,
+        subject: 'New ESCP quiz feedback',
+        from_email: userEmail,
+        question_quality: String(fbState.q1 || ''),
+        career_accuracy: String(fbState.q2 || ''),
+        open_feedback: String(fbState.open || ''),
         timestamp: new Date().toISOString(),
-      });
-      setTimeout(() => {
+
+        // Extra context (safe if template ignores)
+        reply_to: userEmail || FEEDBACK_TO_EMAIL,
+        name: deriveName(userEmail),
+      };
+
+      try {
+        if (!EMAILJS_KEY || EMAILJS_KEY === 'YOUR_EMAILJS_PUBLIC_KEY') {
+          throw new Error('Email delivery is not configured.');
+        }
+        await emailjs.send(EMAILJS_SVC, EMAILJS_TPL_FEEDBACK, payload);
         btn.style.display = 'none';
         document.getElementById('fbSent').style.display = 'block';
-      }, 350);
+      } catch (e) {
+        console.log('Feedback email error:', e);
+        btn.disabled = false;
+        btn.textContent = 'Send feedback →';
+        alert('Could not send feedback. Please try again.');
+      }
     }
 
     // Load EmailJS
