@@ -20,8 +20,10 @@ const RESULT_JSON_SCHEMA = {
     type: 'object',
     additionalProperties: false,
     properties: {
-      protocol_name: { type: 'string' },
-      career_archetype: { type: 'string' },
+      internal_archetype: { type: 'string' },
+      display_archetype: { type: 'string' },
+      archetype_translation: { type: 'string' },
+      trait_chips: { type: 'array', items: { type: 'string' }, minItems: 3, maxItems: 4 },
       fit_summary: { type: 'string' },
       fit_roles: { type: 'array', items: { type: 'string' }, minItems: 3, maxItems: 3 },
       career_protocol: {
@@ -44,8 +46,10 @@ const RESULT_JSON_SCHEMA = {
       final_line: { type: 'string' },
     },
     required: [
-      'protocol_name',
-      'career_archetype',
+      'internal_archetype',
+      'display_archetype',
+      'archetype_translation',
+      'trait_chips',
       'fit_summary',
       'fit_roles',
       'career_protocol',
@@ -74,17 +78,19 @@ export default async function handler(req, res) {
   }
 
   try {
-    const response = await fetch('https://api.openai.com/v1/responses', {
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${process.env.OPENAI_API_KEY}`,
       },
       body: JSON.stringify({
-        model: 'gpt-4.1-mini',
-        input: prompt,
-        max_output_tokens: 1600,
-        response_format: { type: 'json_schema', json_schema: RESULT_JSON_SCHEMA },
+        model: 'gpt-4o-mini',
+        messages: [
+          { role: 'system', content: 'You are a helpful assistant. You must respond in ONLY valid JSON matching this schema: ' + JSON.stringify(RESULT_JSON_SCHEMA) },
+          { role: 'user', content: prompt }
+        ],
+        max_tokens: 1600,
       }),
     });
 
@@ -97,7 +103,7 @@ export default async function handler(req, res) {
         .json({ error: data?.error?.message || 'OpenAI error', details: data?.error || null });
     }
 
-    const text = data?.output_text || '';
+    const text = data.choices && data.choices.length > 0 ? data.choices[0].message.content : '';
     const parsed = safeJsonParse(text);
 
     return res.status(200).json({

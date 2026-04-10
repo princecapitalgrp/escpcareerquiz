@@ -7,15 +7,16 @@
   <title>Rise by Solis — Career Intelligence</title>
   <style>
     :root {
-      --navy: #0F2044;
-      --navy-l: #1a3560;
-      --gold: #C9A84C;
-      --cream: #FAF8F4;
-      --text: #1a1a1a;
-      --muted: #6B6B6B;
-      --hint: #9A9A9A;
-      --border: #E0DDD6;
-      --border-d: #C8C4BC;
+      --warm-cream: #FAF8F4;
+      --warm-stone: #F5F0E8;
+      --dusty-linen: #E8DED0;
+      --amber-mist: #D4B896;
+      --dawn-gold: #C9A54C;
+      --dusty-ochre: #C8A96E;
+      --muted-amber: #D4963A;
+      --warm-walnut: #8C6B3E;
+      --brown-red: #3A2E28;
+      --charcoal: #2A2420;
       --white: #FFFFFF;
     }
 
@@ -27,8 +28,8 @@
 
     body {
       font-family: Georgia, serif;
-      background: var(--cream);
-      color: var(--text);
+      background: var(--warm-cream);
+      color: var(--charcoal);
       min-height: 100vh;
       line-height: 1.6;
     }
@@ -38,16 +39,16 @@
     }
 
     .hdr {
-      background: var(--navy);
+      background: var(--warm-stone);
+      border-bottom: 1px solid var(--dusty-linen);
       padding: 28px 0 24px;
       text-align: center;
     }
 
     .hdr-mark {
-      font-family: -apple-system, sans-serif;
       font-size: 11px;
       letter-spacing: .25em;
-      color: var(--gold);
+      color: var(--warm-walnut);
       text-transform: uppercase;
       margin-bottom: 7px;
     }
@@ -55,21 +56,21 @@
     .hdr-title {
       font-size: 24px;
       font-weight: 400;
-      color: #fff;
+      color: var(--charcoal);
       letter-spacing: -.01em;
       margin-bottom: 8px;
     }
 
     .hdr-sub {
-      font-family: -apple-system, sans-serif;
       font-size: 12px;
-      color: rgba(255, 255, 255, .45);
+      color: var(--warm-walnut);
+      opacity: 0.8;
       letter-spacing: .03em;
     }
 
     .prog-wrap {
       background: var(--white);
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid var(--dusty-linen);
       padding: 14px 0;
       position: sticky;
       top: 0;
@@ -84,23 +85,22 @@
 
     .prog-bg {
       flex: 1;
-      height: 2px;
-      background: var(--border);
-      border-radius: 1px;
+      height: 3px;
+      background: var(--warm-stone);
+      border-radius: 2px;
       overflow: hidden;
     }
 
     .prog-fill {
       height: 100%;
-      background: var(--gold);
-      border-radius: 1px;
+      background: linear-gradient(90deg, var(--muted-amber), var(--dawn-gold));
+      border-radius: 2px;
       transition: width .4s ease;
     }
 
     .prog-lbl {
-      font-family: -apple-system, sans-serif;
       font-size: 11px;
-      color: var(--hint);
+      color: var(--warm-walnut);
       letter-spacing: .07em;
       text-transform: uppercase;
       white-space: nowrap;
@@ -114,154 +114,148 @@
       padding: 0 28px;
     }
 
-    .scr {
-      display: none;
-    }
-
-    .scr.on {
-      display: block;
-    }
+    .scr { display: none; }
+    .scr.on { display: block; }
 
     .intro {
-      padding: 52px 0 44px;
+      padding: 60px 0 50px;
       text-align: center;
     }
 
     .eyebrow {
-      font-family: -apple-system, sans-serif;
       font-size: 10px;
       letter-spacing: .3em;
-      color: var(--gold);
+      color: var(--warm-walnut);
       text-transform: uppercase;
       margin-bottom: 18px;
     }
 
     .intro h1 {
-      font-size: 36px;
+      font-size: 38px;
       font-weight: 400;
-      color: var(--navy);
-      line-height: 1.2;
-      margin-bottom: 18px;
+      color: var(--brown-red);
+      line-height: 1.25;
+      margin-bottom: 22px;
       letter-spacing: -.02em;
     }
 
     .intro-body {
-      font-family: -apple-system, sans-serif;
-      font-size: 14px;
-      color: var(--muted);
+      font-size: 15px;
+      color: var(--charcoal);
+      opacity: 0.85;
       line-height: 1.75;
       max-width: 460px;
-      margin: 0 auto 28px;
+      margin: 0 auto 32px;
     }
 
-    .rule {
-      width: 28px;
-      height: 1px;
-      background: var(--gold);
-      margin: 28px auto;
+    .rule-circle {
+      width: 8px;
+      height: 8px;
+      border: 1px solid var(--dusty-ochre);
+      border-radius: 50%;
+      margin: 32px auto;
     }
 
     .intro-detail {
-      font-family: -apple-system, sans-serif;
-      font-size: 12px;
-      color: var(--hint);
+      font-size: 13px;
+      color: var(--warm-walnut);
       letter-spacing: .04em;
-      margin-bottom: 32px;
+      margin-bottom: 36px;
     }
 
     .qcard {
-      padding: 52px 0 44px;
+      padding: 56px 0 44px;
     }
 
     .q-phase {
-      font-family: -apple-system, sans-serif;
       font-size: 10px;
       letter-spacing: .3em;
-      color: var(--gold);
+      color: var(--warm-walnut);
       text-transform: uppercase;
-      margin-bottom: 8px;
+      margin-bottom: 10px;
     }
 
     .q-num {
-      font-family: -apple-system, sans-serif;
       font-size: 11px;
-      color: var(--hint);
+      color: var(--dusty-ochre);
       letter-spacing: .06em;
-      margin-bottom: 14px;
+      margin-bottom: 16px;
     }
 
     .q-text {
-      font-size: 23px;
+      font-size: 24px;
       font-weight: 400;
-      color: var(--navy);
-      line-height: 1.35;
-      margin-bottom: 7px;
+      color: var(--brown-red);
+      line-height: 1.4;
+      margin-bottom: 8px;
       letter-spacing: -.01em;
     }
 
     .q-sub {
-      font-family: -apple-system, sans-serif;
-      font-size: 13px;
-      color: var(--muted);
-      margin-bottom: 28px;
+      font-size: 14px;
+      color: var(--charcoal);
+      opacity: 0.8;
+      margin-bottom: 32px;
       line-height: 1.5;
     }
 
     .opts {
       display: flex;
       flex-direction: column;
-      gap: 11px;
-      margin-bottom: 32px;
+      gap: 12px;
+      margin-bottom: 36px;
     }
 
     .opt {
       display: flex;
       align-items: flex-start;
-      gap: 13px;
-      padding: 16px 18px;
-      border: 1px solid var(--border);
-      border-radius: 5px;
+      gap: 14px;
+      padding: 18px 20px;
+      border: 1px solid var(--dusty-linen);
+      border-radius: 8px;
       background: var(--white);
       cursor: pointer;
-      transition: all .17s ease;
+      transition: all .2s ease;
       text-align: left;
+      box-shadow: 0 2px 8px rgba(42,36,32,0.02);
     }
 
     .opt:hover {
-      border-color: var(--navy);
-      background: var(--cream);
+      border-color: var(--dusty-ochre);
+      background: var(--warm-stone);
     }
 
     .opt.sel {
-      border-color: var(--navy);
-      background: var(--navy);
+      border-color: var(--dawn-gold);
+      background: var(--warm-stone);
+      box-shadow: 0 4px 12px rgba(201,165,76,0.1);
     }
 
     .dot {
-      width: 17px;
-      height: 17px;
+      width: 18px;
+      height: 18px;
       border-radius: 50%;
-      border: 1.5px solid var(--border-d);
+      border: 1px solid var(--dusty-ochre);
       flex-shrink: 0;
       margin-top: 2px;
-      transition: all .17s;
+      transition: all .2s;
       display: flex;
       align-items: center;
       justify-content: center;
     }
 
     .opt.sel .dot {
-      background: var(--gold);
-      border-color: var(--gold);
+      background: linear-gradient(135deg, var(--muted-amber), var(--dawn-gold));
+      border-color: transparent;
     }
 
     .dot-i {
       width: 6px;
       height: 6px;
       border-radius: 50%;
-      background: var(--navy);
+      background: var(--white);
       opacity: 0;
-      transition: opacity .17s;
+      transition: opacity .2s;
     }
 
     .opt.sel .dot-i {
@@ -269,50 +263,42 @@
     }
 
     .opt-lbl {
-      font-family: -apple-system, sans-serif;
-      font-size: 14px;
-      color: var(--text);
-      line-height: 1.5;
-      transition: color .17s;
-    }
-
-    .opt.sel .opt-lbl {
-      color: #fff;
+      font-size: 15px;
+      color: var(--charcoal);
+      font-weight: 500;
+      line-height: 1.4;
+      transition: color .2s;
     }
 
     .opt-sub {
-      font-size: 12px;
-      color: var(--muted);
-      margin-top: 2px;
-      transition: color .17s;
-    }
-
-    .opt.sel .opt-sub {
-      color: rgba(255, 255, 255, .55);
+      font-size: 13px;
+      color: var(--warm-walnut);
+      margin-top: 4px;
+      transition: color .2s;
     }
 
     .tinput {
       width: 100%;
-      padding: 13px 15px;
-      border: 1px solid var(--border);
-      border-radius: 5px;
-      font-family: -apple-system, sans-serif;
-      font-size: 14px;
-      color: var(--text);
+      padding: 16px 18px;
+      border: 1px solid var(--dusty-linen);
+      border-radius: 8px;
+      font-size: 15px;
+      color: var(--charcoal);
       background: var(--white);
       outline: none;
-      transition: border-color .17s;
+      transition: border-color .2s;
       resize: none;
-      line-height: 1.5;
-      margin-bottom: 32px;
+      line-height: 1.6;
+      margin-bottom: 36px;
+      box-shadow: inset 0 2px 6px rgba(42,36,32,0.02);
     }
 
     .tinput:focus {
-      border-color: var(--navy);
+      border-color: var(--dawn-gold);
     }
 
     .tinput::placeholder {
-      color: var(--hint);
+      color: var(--amber-mist);
     }
 
     .nav {
@@ -322,368 +308,527 @@
       gap: 12px;
     }
 
-    .email-scr {
-      padding: 52px 0 44px;
-      text-align: center;
-    }
-
-    .email-scr h2 {
-      font-size: 26px;
-      font-weight: 400;
-      color: var(--navy);
-      margin-bottom: 12px;
-      letter-spacing: -.01em;
-    }
-
-    .email-scr p {
-      font-family: -apple-system, sans-serif;
-      font-size: 14px;
-      color: var(--muted);
-      margin-bottom: 28px;
-      line-height: 1.65;
-    }
-
-    .email-row {
-      display: flex;
-      gap: 9px;
-      max-width: 400px;
-      margin: 0 auto 10px;
-    }
-
-    .email-inp {
-      flex: 1;
-      padding: 12px 15px;
-      border: 1px solid var(--border-d);
-      border-radius: 5px;
-      font-family: -apple-system, sans-serif;
-      font-size: 14px;
-      outline: none;
-      transition: border-color .17s;
-      background: var(--white);
-    }
-
-    .email-inp:focus {
-      border-color: var(--navy);
-    }
-
-    .email-priv {
-      font-family: -apple-system, sans-serif;
-      font-size: 11px;
-      color: var(--hint);
-      letter-spacing: .02em;
-    }
-
-    .err {
-      font-family: -apple-system, sans-serif;
-      font-size: 12px;
-      color: #8B1A1A;
-      margin-top: 7px;
-      display: none;
-    }
-
+    /* Buttons */
     .btn {
-      font-family: -apple-system, sans-serif;
       font-size: 12px;
-      font-weight: 400;
-      letter-spacing: .09em;
+      font-weight: 500;
+      letter-spacing: .1em;
       text-transform: uppercase;
-      padding: 12px 26px;
-      border-radius: 4px;
+      padding: 14px 28px;
+      border-radius: 6px;
       cursor: pointer;
-      transition: all .17s;
+      transition: all .2s;
       border: none;
       display: inline-block;
     }
 
     .btn-p {
-      background: var(--navy);
-      color: #fff;
+      background: linear-gradient(135deg, var(--muted-amber), var(--dawn-gold));
+      color: var(--white);
+      box-shadow: 0 4px 14px rgba(201,165,76,0.25);
     }
 
     .btn-p:hover {
-      background: var(--navy-l);
+      box-shadow: 0 6px 20px rgba(201,165,76,0.4);
+      transform: translateY(-1px);
     }
 
     .btn-p:disabled {
-      background: var(--border-d);
+      background: var(--dusty-linen);
+      color: var(--warm-walnut);
+      box-shadow: none;
       cursor: not-allowed;
+      transform: translateY(0);
     }
 
     .btn-g {
       background: transparent;
-      color: var(--muted);
-      border: 1px solid var(--border);
-      padding: 11px 22px;
+      color: var(--warm-walnut);
+      border: 1px solid var(--dusty-linen);
+      padding: 13px 26px;
     }
 
     .btn-g:hover {
-      border-color: var(--navy);
-      color: var(--navy);
+      border-color: var(--warm-walnut);
+      color: var(--charcoal);
     }
 
-    .btn-w {
-      width: 100%;
+    .btn-w { width: 100%; text-align: center; }
+
+    /* Email Screen */
+    .email-scr {
+      padding: 60px 0 50px;
       text-align: center;
     }
 
-    .loading {
-      padding: 80px 0;
-      text-align: center;
+    .email-scr h2 {
+      font-size: 28px;
+      font-weight: 400;
+      color: var(--brown-red);
+      margin-bottom: 14px;
+      letter-spacing: -.01em;
     }
 
+    .email-scr p {
+      font-size: 15px;
+      color: var(--charcoal);
+      opacity: 0.8;
+      margin-bottom: 32px;
+      line-height: 1.65;
+    }
+
+    .email-row {
+      display: flex;
+      gap: 12px;
+      max-width: 420px;
+      margin: 0 auto 12px;
+    }
+
+    .email-inp {
+      flex: 1;
+      padding: 14px 18px;
+      border: 1px solid var(--dusty-linen);
+      border-radius: 6px;
+      font-size: 15px;
+      color: var(--charcoal);
+      outline: none;
+      transition: border-color .2s;
+      background: var(--white);
+      box-shadow: inset 0 2px 6px rgba(42,36,32,0.02);
+    }
+
+    .email-inp:focus { border-color: var(--dawn-gold); }
+
+    .email-priv {
+      font-size: 12px;
+      color: var(--warm-walnut);
+      letter-spacing: .02em;
+    }
+
+    .err {
+      font-size: 13px;
+      color: #9A3025;
+      margin-top: 8px;
+      display: none;
+    }
+
+    .loading { padding: 90px 0; text-align: center; }
     .spinner {
-      width: 30px;
-      height: 30px;
-      border: 2px solid var(--border);
-      border-top-color: var(--navy);
+      width: 32px;
+      height: 32px;
+      border: 2px solid var(--dusty-linen);
+      border-top-color: var(--dawn-gold);
       border-radius: 50%;
-      animation: spin .9s linear infinite;
-      margin: 0 auto 22px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 24px;
     }
-
-    @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
-    }
+    @keyframes spin { to { transform: rotate(360deg); } }
 
     .loading-t {
-      font-size: 17px;
-      color: var(--navy);
+      font-size: 18px;
+      color: var(--brown-red);
       margin-bottom: 8px;
     }
-
     .loading-s {
-      font-family: -apple-system, sans-serif;
-      font-size: 12px;
-      color: var(--hint);
+      font-size: 13px;
+      color: var(--warm-walnut);
       letter-spacing: .04em;
     }
 
+    /* Target Result Screen Redesign */
     .result {
-      padding: 44px 0 56px;
+      padding: 56px 0 72px;
     }
 
-    .res-hdr {
-      border-left: 2px solid var(--gold);
-      padding-left: 18px;
-      margin-bottom: 36px;
+    .res-snapshot {
+      margin-bottom: 48px;
     }
 
-    .res-eye {
-      font-family: -apple-system, sans-serif;
+    .snap-lbl {
       font-size: 10px;
-      letter-spacing: .3em;
-      color: var(--gold);
-      text-transform: uppercase;
-      margin-bottom: 9px;
-    }
-
-    .res-arch {
-      font-size: 28px;
-      font-weight: 400;
-      color: var(--navy);
-      margin-bottom: 5px;
-      letter-spacing: -.02em;
-    }
-
-    .res-tag {
-      font-family: -apple-system, sans-serif;
-      font-size: 13px;
-      color: var(--muted);
-      font-style: italic;
-    }
-
-    .res-rule {
-      height: 1px;
-      background: var(--border);
-      margin: 28px 0;
-    }
-
-    .res-sec {
-      margin-bottom: 32px;
-    }
-
-    .res-sec-lbl {
-      font-family: -apple-system, sans-serif;
-      font-size: 10px;
-      letter-spacing: .3em;
-      color: var(--hint);
+      letter-spacing: .25em;
+      color: var(--warm-walnut);
       text-transform: uppercase;
       margin-bottom: 12px;
     }
 
-    .res-body {
+    .snap-title {
+      font-size: 34px;
+      font-weight: 400;
+      color: var(--brown-red);
+      margin-bottom: 12px;
+      line-height: 1.2;
+      letter-spacing: -.02em;
+    }
+
+    .snap-trans {
+      font-size: 18px;
+      color: var(--charcoal);
+      font-style: italic;
+      line-height: 1.5;
+      margin-bottom: 24px;
+    }
+
+    .trait-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 28px;
+    }
+
+    .trait-chip {
+      font-family: -apple-system, sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: .02em;
+      color: var(--brown-red);
+      background: var(--warm-stone);
+      border: 1px solid var(--dusty-linen);
+      padding: 6px 12px;
+      border-radius: 20px;
+    }
+
+    .snap-inter {
+      background: var(--white);
+      border-left: 3px solid var(--muted-amber);
+      padding: 16px 20px;
+      border-radius: 0 6px 6px 0;
       font-size: 15px;
-      color: var(--text);
-      line-height: 1.85;
+      color: var(--charcoal);
+      box-shadow: 0 2px 8px rgba(42,36,32,0.03);
+    }
+
+    .snap-inter strong {
+      font-weight: 600;
+      color: var(--brown-red);
+    }
+
+    .res-sec { margin-bottom: 48px; }
+
+    .sec-lbl {
+      font-size: 11px;
+      letter-spacing: .2em;
+      color: var(--warm-walnut);
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      border-bottom: 1px solid var(--dusty-linen);
+      padding-bottom: 8px;
+    }
+
+    .res-body {
+      font-size: 16px;
+      color: var(--charcoal);
+      line-height: 1.7;
       white-space: pre-wrap;
     }
 
-    .act-card {
+    .roles-list {
+      list-style: none;
+    }
+    
+    .roles-list li {
+      font-size: 16px;
+      color: var(--charcoal);
+      margin-bottom: 12px;
+      position: relative;
+      padding-left: 20px;
+    }
+    
+    .roles-list li::before {
+      content: '•';
+      color: var(--dawn-gold);
+      position: absolute;
+      left: 0;
+      font-size: 18px;
+    }
+
+    /* Three Moves Centerpiece */
+    .moves-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .move-card {
       background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 5px;
-      padding: 18px 20px;
-      margin-bottom: 10px;
+      border: 1px solid var(--dusty-linen);
+      border-radius: 8px;
+      padding: 24px;
+      box-shadow: 0 4px 16px rgba(42,36,32,0.03);
     }
 
-    .act-n {
+    .move-n {
       font-family: -apple-system, sans-serif;
-      font-size: 10px;
-      letter-spacing: .2em;
-      color: var(--gold);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: .15em;
+      color: var(--dusty-ochre);
       text-transform: uppercase;
-      margin-bottom: 7px;
+      margin-bottom: 8px;
     }
 
-    .act-t {
+    .move-t {
       font-family: -apple-system, sans-serif;
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--navy);
-      margin-bottom: 7px;
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--brown-red);
+      margin-bottom: 8px;
+      line-height: 1.3;
     }
 
-    .act-b {
+    .move-b {
       font-family: -apple-system, sans-serif;
-      font-size: 13px;
-      color: var(--muted);
+      font-size: 15px;
+      color: var(--charcoal);
+      opacity: 0.9;
       line-height: 1.6;
     }
 
-    .res-foot {
-      background: var(--navy);
-      border-radius: 5px;
-      padding: 22px;
+    /* LinkedIn Toolbox */
+    .linkedin-box {
+      background: var(--warm-stone);
+      border: 1px solid var(--dusty-linen);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    
+    .in-hdr {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 20px;
+      border-bottom: 1px solid var(--dusty-linen);
+      background: var(--white);
+    }
+
+    .in-lbl {
+      font-family: -apple-system, sans-serif;
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--charcoal);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    .in-btn {
+      font-family: -apple-system, sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--warm-walnut);
+      background: transparent;
+      border: 1px solid var(--dusty-ochre);
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all .2s;
+    }
+    
+    .in-btn:hover {
+      background: var(--dusty-ochre);
+      color: var(--white);
+    }
+
+    .in-body {
+      padding: 24px 20px;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 14px;
+      color: var(--charcoal);
+      line-height: 1.6;
+      white-space: pre-wrap;
+    }
+
+    .sec-secondary {
+      margin-bottom: 32px;
+    }
+    
+    .sec-secondary .sec-lbl { border: none; margin-bottom: 6px; }
+    .sec-secondary .res-body { font-size: 14px; opacity: 0.8; }
+
+    .final-line {
+      font-size: 19px;
+      font-style: italic;
+      color: var(--brown-red);
       text-align: center;
-      margin-top: 36px;
+      margin: 64px 0 48px;
+    }
+
+    .res-foot {
+      background: var(--charcoal);
+      border-radius: 8px;
+      padding: 28px;
+      text-align: center;
     }
 
     .res-foot-s {
-      font-family: -apple-system, sans-serif;
       font-size: 11px;
-      color: rgba(255, 255, 255, .4);
+      color: var(--amber-mist);
       letter-spacing: .09em;
       text-transform: uppercase;
-      margin-bottom: 5px;
-    }
-
-    .res-foot-b {
-      font-size: 17px;
-      color: var(--gold);
-      letter-spacing: .07em;
-    }
-
-    .fb-wrap {
-      margin-top: 48px;
-      padding-top: 40px;
-      border-top: 1px solid var(--border);
-    }
-
-    .fb-title {
-      font-size: 19px;
-      font-weight: 400;
-      color: var(--navy);
       margin-bottom: 6px;
     }
 
+    .res-foot-b {
+      font-size: 18px;
+      color: var(--dawn-gold);
+      letter-spacing: .05em;
+    }
+
+    /* Archetype Accordion */
+    .arch-ref {
+      margin-top: 64px;
+      padding-top: 48px;
+      border-top: 1px solid var(--dusty-linen);
+    }
+    
+    .arch-ref-title {
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--brown-red);
+      margin-bottom: 8px;
+    }
+    
+    .arch-ref-sub {
+      font-size: 14px;
+      color: var(--warm-walnut);
+      margin-bottom: 24px;
+    }
+
+    .acc {
+      border: 1px solid var(--dusty-linen);
+      border-radius: 6px;
+      margin-bottom: 8px;
+      background: var(--white);
+      overflow: hidden;
+    }
+
+    .acc-h {
+      padding: 16px 20px;
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--charcoal);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      user-select: none;
+    }
+    
+    .acc-h::after {
+      content: '+';
+      font-size: 18px;
+      color: var(--dusty-ochre);
+      font-weight: 300;
+      transition: transform .2s;
+    }
+
+    .acc.open .acc-h::after {
+      transform: rotate(45deg);
+    }
+
+    .acc-b {
+      padding: 0 20px;
+      max-height: 0;
+      font-size: 14px;
+      color: var(--charcoal);
+      opacity: 0.85;
+      line-height: 1.6;
+      transition: max-height .3s ease, padding .3s ease;
+    }
+
+    .acc.open .acc-b {
+      padding: 0 20px 20px;
+      max-height: 200px;
+    }
+
+    /* Feedback block */
+    .fb-wrap {
+      margin-top: 60px;
+      padding: 40px;
+      background: var(--warm-stone);
+      border-radius: 8px;
+      border: 1px solid var(--dusty-linen);
+    }
+
+    .fb-title {
+      font-size: 20px;
+      font-weight: 400;
+      color: var(--brown-red);
+      margin-bottom: 8px;
+    }
+
     .fb-sub {
-      font-family: -apple-system, sans-serif;
-      font-size: 13px;
-      color: var(--muted);
-      margin-bottom: 28px;
+      font-size: 14px;
+      color: var(--charcoal);
+      opacity: 0.8;
+      margin-bottom: 32px;
       line-height: 1.5;
     }
 
-    .fb-q {
-      margin-bottom: 28px;
-    }
+    .fb-q { margin-bottom: 28px; }
 
     .fb-qlbl {
-      font-family: -apple-system, sans-serif;
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--navy);
-      margin-bottom: 5px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--charcoal);
+      margin-bottom: 6px;
       line-height: 1.4;
     }
 
     .fb-qlbl-sub {
-      font-family: -apple-system, sans-serif;
-      font-size: 11px;
-      color: var(--hint);
+      font-size: 12px;
+      color: var(--warm-walnut);
       margin-bottom: 12px;
-      letter-spacing: .02em;
     }
 
     .stars {
       display: flex;
-      gap: 8px;
-      margin-bottom: 0;
+      gap: 10px;
     }
 
     .star {
-      font-size: 24px;
+      font-size: 28px;
       cursor: pointer;
-      color: var(--border-d);
-      transition: color .15s;
+      color: var(--dusty-linen);
+      transition: color .2s;
       user-select: none;
       line-height: 1;
     }
 
-    .star.lit {
-      color: var(--gold);
-    }
+    .star.lit { color: var(--dawn-gold); }
 
     .fb-text {
       width: 100%;
-      padding: 11px 14px;
-      border: 1px solid var(--border);
-      border-radius: 5px;
-      font-family: -apple-system, sans-serif;
-      font-size: 13px;
-      color: var(--text);
+      padding: 14px 18px;
+      border: 1px solid var(--dusty-linen);
+      border-radius: 6px;
+      font-size: 14px;
+      color: var(--charcoal);
       background: var(--white);
       outline: none;
-      resize: none;
+      resize: vertical;
       line-height: 1.5;
-      transition: border-color .17s;
+      transition: border-color .2s;
     }
 
-    .fb-text:focus {
-      border-color: var(--navy);
-    }
-
-    .fb-text::placeholder {
-      color: var(--hint);
-    }
+    .fb-text:focus { border-color: var(--dawn-gold); }
+    .fb-text::placeholder { color: var(--amber-mist); }
 
     .fb-sent {
-      font-family: -apple-system, sans-serif;
-      font-size: 13px;
-      color: #2D6A4F;
+      font-size: 14px;
+      color: #725A38;
       display: none;
-      margin-top: 12px;
-      letter-spacing: .02em;
+      margin-top: 16px;
+      font-weight: 500;
     }
 
     @media(max-width:480px) {
-      .intro h1 {
-        font-size: 26px;
-      }
-
-      .q-text {
-        font-size: 18px;
-      }
-
-      .email-row {
-        flex-direction: column;
-      }
-
-      .res-arch {
-        font-size: 22px;
-      }
+      .intro h1 { font-size: 30px; }
+      .q-text { font-size: 20px; }
+      .email-row { flex-direction: column; }
+      .snap-title { font-size: 28px; }
+      .snap-trans { font-size: 16px; }
+      .fb-wrap { padding: 24px 20px; }
     }
   </style>
 </head>
@@ -691,17 +836,15 @@
 <body>
 
   <div class="hdr">
-    <div class="hdr-mark">Rise by Solis</div>
+    <div class="hdr-mark sf">Rise by Solis</div>
     <div class="hdr-title">Career Intelligence</div>
-    <div class="hdr-sub">ESCP Bachelor in Management &nbsp;·&nbsp; Class of 2027</div>
+    <div class="hdr-sub sf">ESCP Bachelor in Management &nbsp;·&nbsp; Class of 2027</div>
   </div>
 
   <div id="progWrap" style="display:none;" class="prog-wrap">
     <div class="wrap">
       <div class="prog-inner">
-        <div class="prog-bg">
-          <div class="prog-fill" id="progFill" style="width:0%"></div>
-        </div>
+        <div class="prog-bg"><div class="prog-fill" id="progFill" style="width:0%"></div></div>
         <div class="prog-lbl sf" id="progLbl">1 / 10</div>
       </div>
     </div>
@@ -711,36 +854,34 @@
 
     <div class="scr on" id="scr-intro">
       <div class="intro">
-        <div class="eyebrow">Career Protocol</div>
+        <div class="eyebrow sf">Career Protocol</div>
         <h1>The right path isn't found.<br>It's recognised.</h1>
-        <p class="intro-body">Ten questions. A personalised career intelligence report — your optimal sector, role
-          archetype, and the three moves to make right now.</p>
-        <div class="rule"></div>
-        <div class="intro-detail sf">10 questions &nbsp;·&nbsp; 4 minutes &nbsp;·&nbsp; Your result, privately delivered
-        </div>
-        <button class="btn btn-p" onclick="startQuiz()">Begin &rarr;</button>
+        <p class="intro-body sf">Ten questions. A personalised career intelligence report — your optimal sector, role archetype, and the three moves to make right now.</p>
+        <div class="rule-circle"></div>
+        <div class="intro-detail sf">10 questions &nbsp;·&nbsp; 4 minutes &nbsp;·&nbsp; Your result, privately delivered</div>
+        <button class="btn btn-p sf" onclick="startQuiz()">Begin &rarr;</button>
       </div>
     </div>
 
     <div class="scr" id="scr-q">
       <div class="qcard" id="qContent"></div>
       <div class="nav">
-        <button class="btn btn-g" id="btnBack" onclick="goBack()">&larr; Back</button>
-        <button class="btn btn-p" id="btnNext" onclick="goNext()" disabled>Continue &rarr;</button>
+        <button class="btn btn-g sf" id="btnBack" onclick="goBack()">&larr; Back</button>
+        <button class="btn btn-p sf" id="btnNext" onclick="goNext()" disabled>Continue &rarr;</button>
       </div>
     </div>
 
     <div class="scr" id="scr-email">
       <div class="email-scr">
-        <div class="eyebrow">Almost there</div>
+        <div class="eyebrow sf">Almost there</div>
         <h2>Where should we send your protocol?</h2>
-        <p>Your career report appears here instantly and arrives in your inbox.<br>No newsletters. No noise.</p>
+        <p class="sf">Your career report appears here instantly and arrives in your inbox.<br>No newsletters. No noise.</p>
         <div class="email-row">
           <input type="email" class="email-inp sf" id="emailInp" placeholder="your@email.com" oninput="chkEmail()">
-          <button class="btn btn-p" id="btnGen" onclick="generate()" disabled>Generate &rarr;</button>
+          <button class="btn btn-p sf" id="btnGen" onclick="generate()" disabled>Generate &rarr;</button>
         </div>
-        <div class="err" id="emailErr">Please enter a valid email address.</div>
-        <p class="email-priv sf" style="margin-top:10px;">Your data stays yours. We never share or sell it.</p>
+        <div class="err sf" id="emailErr">Please enter a valid email address.</div>
+        <p class="email-priv sf" style="margin-top:16px;">Your data stays yours. We never share or sell it.</p>
       </div>
     </div>
 
@@ -759,49 +900,14 @@
   </div>
 
   <script>
-    // #region agent log
-    const __dbg = (hypothesisId, message, data) => {
-      try {
-        fetch('http://127.0.0.1:7757/ingest/b7743389-87c0-47df-aea0-42c35460664d', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'X-Debug-Session-Id': 'b84d84' },
-          body: JSON.stringify({
-            sessionId: 'b84d84',
-            runId: 'begin-broken-pre',
-            hypothesisId,
-            location: 'index.html:script',
-            message,
-            data,
-            timestamp: Date.now()
-          })
-        }).catch(() => {});
-      } catch { /* noop */ }
-    };
-
-    window.addEventListener('error', (e) => {
-      __dbg('H_begin_1_parse_or_runtime', 'window.error', {
-        message: e?.message,
-        filename: e?.filename,
-        lineno: e?.lineno,
-        colno: e?.colno
-      });
-    });
-    window.addEventListener('unhandledrejection', (e) => {
-      __dbg('H_begin_1_parse_or_runtime', 'unhandledrejection', {
-        reason: String(e?.reason?.message || e?.reason || '')
-      });
-    });
-    __dbg('H_begin_2_script_loaded', 'script tag entered', { ua: navigator.userAgent });
-    // #endregion agent log
-
-    // ── EmailJS config (public keys only — safe to commit) ──────
+    // ── EmailJS config (public keys only) ──────
     const EMAILJS_KEY = 'enqDYPOpz2FQvk_67';
     const EMAILJS_SVC = 'service_xbuhjgq';
     const EMAILJS_TPL_RESULT = 'template_d8pkz2j';
     const EMAILJS_TPL_FEEDBACK = 'template_rn537v8';
     const FEEDBACK_TO_EMAIL = 'antonio.grillo_balen@edu.escp.eu';
-    // No Anthropic key here — it lives in Vercel environment variables
 
+    // ── Rewritten Questionnaire ──────
     const Qs = [
       {
         phase: 'Phase I — Reality', num: '01',
@@ -821,10 +927,10 @@
         sub: 'Not conversational — professionally. This opens or closes specific markets.',
         type: 'opts',
         opts: [
-          { l: 'English only', v: 'en' },
           { l: 'English + French', v: 'en_fr' },
-          { l: 'English + French + one other', v: 'en_fr_plus' },
-          { l: 'Three or more at professional level', v: 'multilingual' },
+          { l: 'English + German', v: 'en_de' },
+          { l: 'English + Spanish', v: 'en_es' },
+          { l: '3+ languages at professional level', v: 'multilingual' },
         ]
       },
       {
@@ -861,8 +967,8 @@
       },
       {
         phase: 'Phase II — The Logic Gates', num: '06',
-        text: 'Which environment makes you sharper?',
-        sub: 'Where you do your best thinking — not where you think you should work.',
+        text: 'Where do you actually do your best thinking?',
+        sub: 'Not where you think you should work, but where your mind is sharpest.',
         type: 'opts',
         opts: [
           { l: 'Silence — low stimulus, deep concentration', v: 'silence', s: 'Offices, research, focused solitude' },
@@ -922,24 +1028,7 @@
       document.getElementById('progWrap').style.display = 'block';
       cur = 0; renderQ(); show('q');
     }
-
-    // #region agent log
     window.startQuiz = startQuiz;
-    document.addEventListener('DOMContentLoaded', () => {
-      const btn = document.querySelector('button[onclick="startQuiz()"]');
-      __dbg('H_begin_3_startQuiz_global', 'dom ready', {
-        hasWindowStartQuiz: typeof window.startQuiz === 'function',
-        beginButtonFound: !!btn
-      });
-      if (btn) {
-        btn.addEventListener('click', () => {
-          __dbg('H_begin_4_begin_clicked', 'begin clicked', {
-            hasWindowStartQuiz: typeof window.startQuiz === 'function'
-          });
-        });
-      }
-    });
-    // #endregion agent log
 
     function renderQ() {
       const q = Qs[cur];
@@ -961,8 +1050,8 @@
           html += `<div class="opt${sel}" onclick="pick(${i})">
         <div class="dot"><div class="dot-i"></div></div>
         <div>
-          <div class="opt-lbl sf">${o.l}</div>
-          ${o.s ? `<div class="opt-sub sf">${o.s}</div>` : ''}
+          <div class="opt-lbl">${o.l}</div>
+          ${o.s ? `<div class="opt-sub">${o.s}</div>` : ''}
         </div>
       </div>`;
         });
@@ -1008,7 +1097,7 @@
     }
 
     const LOAD_MSGS = [
-      'Mapping your archetype...',
+      'Mapping your internal archetype...',
       'Identifying your sector alignment...',
       'Building your action sequence...',
       'Calibrating the protocol...',
@@ -1019,11 +1108,12 @@
       document.getElementById('loadMsg').textContent = LOAD_MSGS[loadIdx];
     }
 
+    // ── Prompt Refactoring (Hybrid Archetype) ──────
     function buildPrompt() {
       const labels = {
         0: 'Current ESCP stage', 1: 'Professional languages',
         2: 'Ideal working day', 3: 'Author vs Protagonist (locus of control)',
-        4: 'Stress response — Push vs Pull', 5: 'Focus environment',
+        4: 'Stress response', 5: 'Focus environment',
         6: 'Hero burden archetype', 7: 'Childhood work model',
         8: 'Current professional weight (The Weight)',
         9: 'One-year success evidence (Identity Anchor)',
@@ -1037,31 +1127,41 @@
         return `${labels[i]}: ${v}`;
       }).join('\n');
 
-      return `You are the Solis Career Intelligence Engine. You generate a single, named career protocol for one ESCP second-year bachelor in management student. You are not a career counsellor. You are a precision instrument that reads a person's current state and orientation, then delivers a specific protocol: the right sector, the right role type, and the three moves to make immediately.
+      return `You are the Solis Career Intelligence Engine. You generate a high-impact, premium career protocol for an ESCP second-year bachelor in management student. 
 
 STUDENT PROFILE:
 ${lines}
 
 CLASSIFICATION RULES:
-Read Q4 (Author/Protagonist) and Q5 (Push/Pull) to assign one quadrant:
-- Author + Push = ARCHITECT: risk is control escalation. Give bounded precision, intelligent constraint, fewer choices. Tone: direct, non-escalatory.
-- Author + Pull = ALCHEMIST: risk is false-start shame. Give object-completion tasks, micro-momentum. Tone: low-friction, momentum-focused.
-- Protagonist + Push = SENTINEL: risk is anticipatory anxiety. Give grounding before movement. Tone: steady, reassuring.
-- Protagonist + Pull = TIDE: risk is dissociative drift. Give gentle tethering, low-stakes anchors. Tone: atmospheric, invitation-based.
+You must categorize the student into one of these 6 internal base archetypes (evaluate their traits holistically):
+1. The Analyst
+2. The Strategist
+3. The Client Partner
+4. The Operator
+5. The Builder
+6. The Connector
 
-Apply Q6 (Silence/Join) as texture modifier to environment recommendations only.
-Q9 (The Weight) is the most important personalisation lever — reference it explicitly in the frame paragraph.
-Q8 (childhood model) calibrates tone: Mission = structured language; Mess = resilience-acknowledging; Absence = self-directed; Passion = meaning-first.
-Never reveal the archetype name in the output. Never use: "leverage," "synergies," "hit the ground running," "passionate about." No motivational-poster language.
+Based on their answers, design a highly specific 'display_archetype' naming convention (e.g. "Structured Finance Builder" or "Adaptive Client Strategist"). Also, generate 3-4 'trait_chips' (one-word traits reflecting their risk posture/sector).
 
-OUTPUT FORMAT (CRITICAL):
-Return ONLY valid JSON. No markdown. No prose outside JSON. No code fences.
-The JSON must match this schema exactly:
+CONTENT ENFORCEMENT (CRITICAL):
+- Copy must be significantly shorter (cut 30% of normal padding). Use short sentences.
+- No generic transitions, no HR-speak, no fluff.
+- tone: sharp, understated, direct, and premium.
+- fit_summary: 2-3 sentences max. Reference "The Weight" (Q9 input) directly to ensure extreme personalization.
+- career_protocol cards MUST be execution-heavy. Each move has a short, bold actionable verb title, and exactly 1-2 sharp explanatory sentences (no essays).
+- linkedin_outreach: Provide a short, highly tailored, copy-paste block.
+- anti_pattern: One sharp sentence describing the behavioral risk they need to interrupt.
+- final_line: Exactly this: "You do not need a perfect plan. You need the right first three moves."
+
+OUTPUT FORMAT:
+Return ONLY perfectly valid JSON matching the schema precisely. No prose outside. No markdown fences.
 {
-  "protocol_name": "string",
-  "career_archetype": "string",
+  "internal_archetype": "string",
+  "display_archetype": "string",
+  "archetype_translation": "1-sentence plain English translation of how they operate best",
+  "trait_chips": ["Trait 1", "Trait 2", "Trait 3"],
   "fit_summary": "string",
-  "fit_roles": ["string", "string", "string"],
+  "fit_roles": ["Role 1", "Role 2", "Role 3"],
   "career_protocol": [
     { "title": "string", "body": "string" },
     { "title": "string", "body": "string" },
@@ -1070,17 +1170,8 @@ The JSON must match this schema exactly:
   "linkedin_outreach": "string",
   "timing_note": "string",
   "anti_pattern": "string",
-  "final_line": "string"
+  "final_line": "You do not need a perfect plan. You need the right first three moves."
 }
-
-CONTENT RULES:
-- fit_summary is 3–5 sentences and references The Weight (Q9) in sentence 1 or 2.
-- fit_roles are concrete roles (not broad categories) and should feel realistic for an ESCP student.
-- career_protocol is exactly 3 moves with actionable steps; each move body is 2–4 sentences.
-- linkedin_outreach includes one tailored opening line template.
-- timing_note is 1–2 sentences relative to their stage (Q1).
-- anti_pattern names the pattern this protocol interrupts (1 sentence).
-- final_line is 1 sentence, not a summary.
 `;
     }
 
@@ -1094,7 +1185,6 @@ CONTENT RULES:
       loadTimer = setInterval(cycleLoad, 1800);
 
       try {
-        // Calls our Vercel serverless proxy — no API key in browser
         const resp = await fetch('/api/generate', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -1125,73 +1215,128 @@ CONTENT RULES:
         .replace(/"/g, '&quot;')
         .replace(/'/g, '&#039;');
     }
+    
+    function copyToClipboard(text) {
+      navigator.clipboard.writeText(text).then(() => {
+        const btn = document.getElementById('copyBtn');
+        btn.textContent = 'Copied!';
+        setTimeout(() => btn.textContent = 'Copy Message', 2000);
+      });
+    }
+    
+    function toggleAcc(el) {
+      el.classList.toggle('open');
+    }
 
     function renderResult(r) {
       const moves = Array.isArray(r?.career_protocol) ? r.career_protocol : [];
       const roles = Array.isArray(r?.fit_roles) ? r.fit_roles : [];
+      const chips = Array.isArray(r?.trait_chips) ? r.trait_chips : [];
+
+      const chipsHTML = chips.map(c => `<span class="trait-chip">${escapeHtml(c)}</span>`).join('');
 
       const movesHTML = moves.slice(0, 3).map((m, i) => `
-    <div class="act-card">
-      <div class="act-n sf">Move ${i + 1}</div>
-      <div class="act-t sf">${escapeHtml(m?.title || ('Action ' + (i + 1)))}</div>
-      <div class="act-b sf">${escapeHtml(m?.body || '')}</div>
-    </div>`).join('') || `<div class="res-body">${escapeHtml(JSON.stringify(r ?? {}, null, 2))}</div>`;
+    <div class="move-card">
+      <div class="move-n">Move ${i + 1}</div>
+      <div class="move-t">${escapeHtml(m?.title || ('Action ' + (i + 1)))}</div>
+      <div class="move-b">${escapeHtml(m?.body || '')}</div>
+    </div>`).join('');
 
       document.getElementById('resultContent').innerHTML = `
-    <div class="res-hdr">
-      <div class="res-eye">Your Career Protocol</div>
-      <div class="res-arch">${escapeHtml(r?.protocol_name || 'Your Protocol')}</div>
-      <div class="res-tag">Rise by Solis &nbsp;&middot;&nbsp; ESCP Career Intelligence</div>
+    
+    <div class="res-snapshot">
+      <div class="snap-lbl sf">Your Best-Fit Direction</div>
+      <div class="snap-title">${escapeHtml(r?.display_archetype || 'Career Protocol')}</div>
+      <div class="snap-trans sf">${escapeHtml(r?.archetype_translation || '')}</div>
+      ${chipsHTML ? `<div class="trait-chips">${chipsHTML}</div>` : ''}
+      
+      ${r?.anti_pattern ? `
+      <div class="snap-inter sf">
+        <strong>Pattern to Interrupt:</strong> ${escapeHtml(r.anti_pattern)}
+      </div>` : ''}
     </div>
 
-    ${r?.career_archetype ? `<div class="res-sec">
-      <div class="res-sec-lbl sf">Career archetype</div>
-      <div class="res-body">${escapeHtml(r.career_archetype)}</div>
-    </div>` : ''}
-
-    ${r?.anti_pattern ? `<div class="res-sec">
-      <div class="res-sec-lbl sf">The pattern to interrupt</div>
-      <div class="res-body">${escapeHtml(r.anti_pattern)}</div>
-    </div>` : ''}
-
-    ${r?.fit_summary ? `<div class="res-sec">
-      <div class="res-sec-lbl sf">Fit summary</div>
+    ${r?.fit_summary ? `
+    <div class="res-sec">
+      <div class="sec-lbl sf">Fit summary</div>
       <div class="res-body">${escapeHtml(r.fit_summary)}</div>
     </div>` : ''}
 
-    <div class="res-rule"></div>
-
-    ${roles.length ? `<div class="res-sec">
-      <div class="res-sec-lbl sf">Fit roles</div>
-      <div class="res-body">${escapeHtml(roles.map(x => `• ${x}`).join('\n'))}</div>
+    ${roles.length ? `
+    <div class="res-sec">
+      <div class="sec-lbl sf">Fit roles</div>
+      <ul class="roles-list sf">
+        ${roles.map(x => `<li>${escapeHtml(x)}</li>`).join('')}
+      </ul>
     </div>` : ''}
-
-    <div class="res-rule"></div>
 
     <div class="res-sec">
-      <div class="res-sec-lbl sf">Three moves &mdash; starting now</div>
-      ${movesHTML}
+      <div class="sec-lbl sf">Three moves &mdash; starting now</div>
+      <div class="moves-wrap">
+        ${movesHTML}
+      </div>
     </div>
 
-    ${r?.linkedin_outreach ? `<div class="res-sec">
-      <div class="res-sec-lbl sf">LinkedIn outreach</div>
-      <div class="res-body">${escapeHtml(r.linkedin_outreach)}</div>
+    ${r?.linkedin_outreach ? `
+    <div class="res-sec">
+      <div class="linkedin-box">
+        <div class="in-hdr">
+          <div class="in-lbl sf">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--dawn-gold)"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            Outreach Script
+          </div>
+          <button class="in-btn sf" id="copyBtn" onclick="copyToClipboard(\`${escapeHtml(r.linkedin_outreach).replace(/\n/g, '\\n')}\`)">Copy Message</button>
+        </div>
+        <div class="in-body">${escapeHtml(r.linkedin_outreach)}</div>
+      </div>
     </div>` : ''}
 
-    ${r?.timing_note ? `<div class="res-sec">
-      <div class="res-sec-lbl sf">Timing note</div>
-      <div class="res-body">${escapeHtml(r.timing_note)}</div>
+    ${r?.timing_note ? `
+    <div class="res-sec sec-secondary">
+      <div class="sec-lbl sf">Timing note</div>
+      <div class="res-body sf">${escapeHtml(r.timing_note)}</div>
     </div>` : ''}
 
-    ${r?.final_line ? `<div style="border-left:2px solid var(--gold);padding-left:16px;margin-top:28px;">
-      <div class="res-body" style="font-style:italic;color:var(--navy);">${escapeHtml(r.final_line)}</div>
-    </div>` : ''}
+    ${r?.final_line ? `
+    <div class="final-line">${escapeHtml(r.final_line)}</div>` : ''}
 
     <div class="res-foot">
-      <div class="res-foot-s sf">Generated by</div>
+      <div class="res-foot-s sf">Career Intelligence Engine</div>
       <div class="res-foot-b">Rise by Solis</div>
     </div>
+    
+    <!-- Primary Archetypes Footer Reference -->
+    <div class="arch-ref">
+      <div class="arch-ref-title">The Master Taxonomy</div>
+      <div class="arch-ref-sub sf">Explore the six core internal architectures.</div>
+      
+      <div class="acc" onclick="toggleAcc(this)">
+        <div class="acc-h sf">The Analyst</div>
+        <div class="acc-b sf">Thrives in structured, high-standards environments. Prioritizes depth, precision, and credential-building. Excellence is measured in flawless execution.</div>
+      </div>
+      <div class="acc" onclick="toggleAcc(this)">
+        <div class="acc-h sf">The Strategist</div>
+        <div class="acc-b sf">Operates best when identifying patterns and abstracting complexity. Values long-term vision over immediate tactical deployment.</div>
+      </div>
+      <div class="acc" onclick="toggleAcc(this)">
+        <div class="acc-h sf">The Client Partner</div>
+        <div class="acc-b sf">Energy comes from external alignment and translating complexity into clarity for others. Highly adaptive in front-line deal flow and advisory.</div>
+      </div>
+      <div class="acc" onclick="toggleAcc(this)">
+        <div class="acc-h sf">The Operator</div>
+        <div class="acc-b sf">Driven by momentum and pragmatic problem solving. Moves fast, resolves blockers, and values functional delivery over perfect theory.</div>
+      </div>
+      <div class="acc" onclick="toggleAcc(this)">
+        <div class="acc-h sf">The Builder</div>
+        <div class="acc-b sf">Requires a blank page or a broken system to fix. Dislikes bureaucratic friction; values ownership, product iteration, and entrepreneurial agency.</div>
+      </div>
+      <div class="acc" onclick="toggleAcc(this)">
+        <div class="acc-h sf">The Connector</div>
+        <div class="acc-b sf">Finds leverage in human networks and synthesis. Brings disparate concepts or parties together to unlock value that others cannot see.</div>
+      </div>
+    </div>
 
+    <!-- Feedback Framework -->
     <div class="fb-wrap">
       <div class="fb-title">Help sharpen the next version.</div>
       <p class="fb-sub sf">Three quick questions. Anonymous. Goes directly to the product team.</p>
@@ -1220,7 +1365,7 @@ CONTENT RULES:
           oninput="fbState.open=this.value"></textarea>
       </div>
 
-      <button class="btn btn-p btn-w" id="fbBtn" onclick="submitFeedback()">Send feedback &rarr;</button>
+      <button class="btn btn-p btn-w sf" id="fbBtn" onclick="submitFeedback()">Send feedback &rarr;</button>
       <div class="fb-sent sf" id="fbSent">&#10003;&nbsp; Received. Thank you &mdash; this shapes what comes next.</div>
     </div>`;
 
@@ -1231,10 +1376,10 @@ CONTENT RULES:
     function renderError(msg) {
       document.getElementById('resultContent').innerHTML = `
     <div class="result" style="text-align:center;padding:60px 0;">
-      <div class="res-eye">Something went wrong</div>
-      <div class="res-arch" style="font-size:20px;margin-bottom:12px;">Generation failed</div>
-      <div class="sf" style="font-size:13px;color:var(--muted);margin-bottom:28px;">${msg || 'Please try again.'}</div>
-      <button class="btn btn-p" onclick="show('email')">&larr; Try again</button>
+      <div class="snap-lbl sf">Something went wrong</div>
+      <div class="snap-title" style="font-size:24px;margin-bottom:12px;">Generation failed</div>
+      <div class="sf" style="font-size:14px;color:var(--charcoal);opacity:0.8;margin-bottom:32px;">${msg || 'Please try again.'}</div>
+      <button class="btn btn-g sf" onclick="show('email')">&larr; Try again</button>
     </div>`;
       show('result');
     }
@@ -1243,8 +1388,9 @@ CONTENT RULES:
       const roles = Array.isArray(r?.fit_roles) ? r.fit_roles : [];
       const moves = Array.isArray(r?.career_protocol) ? r.career_protocol : [];
       const lines = [];
-      lines.push(r?.protocol_name ? r.protocol_name : 'Your Solis Career Protocol');
-      if (r?.career_archetype) lines.push(`\nCareer archetype: ${r.career_archetype}`);
+      lines.push(r?.display_archetype ? r.display_archetype : 'Your Solis Career Protocol');
+      if (r?.internal_archetype) lines.push(`\nInternal Base: ${r.internal_archetype}`);
+      if (r?.archetype_translation) lines.push(`\nTranslation: ${r.archetype_translation}`);
       if (r?.anti_pattern) lines.push(`\nPattern to interrupt:\n${r.anti_pattern}`);
       if (r?.fit_summary) lines.push(`\nFit summary:\n${r.fit_summary}`);
       if (roles.length) lines.push(`\nFit roles:\n- ${roles.join('\n- ')}`);
@@ -1261,7 +1407,6 @@ CONTENT RULES:
     }
 
     function deriveName(email) {
-      // Derive a readable name from email: antonio.grillo_balen@... → "antonio grillo balen"
       const local = (email || '').split('@')[0].replace(/[._-]/g, ' ');
       return local.charAt(0).toUpperCase() + local.slice(1);
     }
@@ -1273,16 +1418,13 @@ CONTENT RULES:
       try {
         const resultText = composeResultEmailText(r);
         emailjs.send(EMAILJS_SVC, EMAILJS_TPL_RESULT, {
-          // Common template vars (per README)
           subject: 'Your Rise by Solis career protocol',
           result_text: resultText,
           to_email: userEmail,
-
-          // Existing/extra vars (safe if template ignores them)
           reply_to: FEEDBACK_TO_EMAIL,
           name: deriveName(userEmail),
           time: '',
-          career_archetype: r?.career_archetype || '',
+          career_archetype: r?.display_archetype || '',
           fit_summary: r?.fit_summary || '',
           fit_roles: roles.map(x => `• ${x}`).join('\n'),
           career_protocol: moves.slice(0, 3).map((m, i) =>
@@ -1298,8 +1440,6 @@ CONTENT RULES:
     function sendFeedbackRequestEmail() {
       if (!EMAILJS_KEY || EMAILJS_KEY === 'YOUR_EMAILJS_PUBLIC_KEY') return;
       try {
-        // Optional: send a short "thanks + feedback prompt" to the user.
-        // This is NOT the feedback submission itself (that is handled in submitFeedback()).
         emailjs.send(EMAILJS_SVC, EMAILJS_TPL_FEEDBACK, {
           to_email: userEmail,
           reply_to: FEEDBACK_TO_EMAIL,
@@ -1327,7 +1467,6 @@ CONTENT RULES:
       const btn = document.getElementById('fbBtn');
       btn.disabled = true; btn.textContent = 'Sending...';
       const payload = {
-        // Per README feedback template vars
         to_email: FEEDBACK_TO_EMAIL,
         subject: 'New ESCP quiz feedback',
         from_email: userEmail,
@@ -1335,8 +1474,6 @@ CONTENT RULES:
         career_accuracy: String(fbState.q2 || ''),
         open_feedback: String(fbState.open || ''),
         timestamp: new Date().toISOString(),
-
-        // Extra context (safe if template ignores)
         reply_to: userEmail || FEEDBACK_TO_EMAIL,
         name: deriveName(userEmail),
       };
@@ -1365,5 +1502,4 @@ CONTENT RULES:
     })();
   </script>
 </body>
-
 </html>
