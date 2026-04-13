@@ -23,13 +23,11 @@ const RESULT_JSON_SCHEMA = {
       internal_archetype: { type: 'string' },
       display_archetype: { type: 'string' },
       archetype_translation: { type: 'string' },
-      trait_chips: { type: 'array', items: { type: 'string' }, minItems: 3, maxItems: 4 },
+      trait_chips: { type: 'array', items: { type: 'string' } },
       fit_summary: { type: 'string' },
-      fit_roles: { type: 'array', items: { type: 'string' }, minItems: 3, maxItems: 3 },
+      fit_roles: { type: 'array', items: { type: 'string' } },
       career_protocol: {
         type: 'array',
-        minItems: 3,
-        maxItems: 3,
         items: {
           type: 'object',
           additionalProperties: false,
@@ -92,7 +90,7 @@ export default async function handler(req, res) {
           { role: 'system', content: 'You are a career intelligence assistant. Respond with a JSON object that exactly matches the required schema.' },
           { role: 'user', content: prompt }
         ],
-        max_tokens: 1600,
+        max_tokens: 2500,
         response_format: {
           type: 'json_schema',
           json_schema: RESULT_JSON_SCHEMA,
