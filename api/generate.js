@@ -43,6 +43,7 @@ const RESULT_JSON_SCHEMA = {
       linkedin_outreach: { type: 'string' },
       timing_note: { type: 'string' },
       anti_pattern: { type: 'string' },
+      why_this_fits: { type: 'string' },
       final_line: { type: 'string' },
     },
     required: [
@@ -56,6 +57,7 @@ const RESULT_JSON_SCHEMA = {
       'linkedin_outreach',
       'timing_note',
       'anti_pattern',
+      'why_this_fits',
       'final_line',
     ],
   },
@@ -87,10 +89,14 @@ export default async function handler(req, res) {
       body: JSON.stringify({
         model: 'gpt-4o-mini',
         messages: [
-          { role: 'system', content: 'You are a helpful assistant. You must respond in ONLY valid JSON matching this schema: ' + JSON.stringify(RESULT_JSON_SCHEMA) },
+          { role: 'system', content: 'You are a career intelligence assistant. Respond with a JSON object that exactly matches the required schema.' },
           { role: 'user', content: prompt }
         ],
         max_tokens: 1600,
+        response_format: {
+          type: 'json_schema',
+          json_schema: RESULT_JSON_SCHEMA,
+        },
       }),
     });
 

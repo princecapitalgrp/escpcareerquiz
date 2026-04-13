@@ -1010,6 +1010,122 @@
       box-shadow: 0 10px 30px rgba(0,0,0,0.2);
       display: none;
     }
+
+    /* ── Visual Enhancements ──────────────────────── */
+
+    /* Screen transitions — transform-only so pointer events are never blocked */
+    .scr.on {
+      animation: scrIn .25s ease-out;
+    }
+    @keyframes scrIn {
+      from { transform: translateY(8px); }
+      to   { transform: translateY(0); }
+    }
+
+    /* Header — gold top border + gradient depth */
+    .hdr {
+      border-top: 2px solid var(--dawn-gold);
+      background: linear-gradient(180deg, #F0EAE0 0%, var(--warm-cream) 100%);
+      padding: 30px 0 26px;
+    }
+    .hdr-mark {
+      letter-spacing: .3em;
+    }
+    .hdr-title {
+      font-size: 26px;
+      letter-spacing: -.015em;
+    }
+
+    /* Progress bar — 1px thicker, fill glow */
+    .prog-bg { height: 4px; }
+    .prog-fill {
+      box-shadow: 0 0 8px rgba(201,165,76,.45);
+    }
+
+    /* Options — lift on hover, gold inset accent when selected */
+    .opt {
+      border-radius: 10px;
+      box-shadow: 0 1px 4px rgba(42,36,32,.03), 0 2px 8px rgba(42,36,32,.02);
+      transition: border-color .18s ease, background .18s ease,
+                  box-shadow .18s ease, transform .18s ease;
+    }
+    .opt:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 18px rgba(42,36,32,.07);
+    }
+    .opt.sel {
+      box-shadow: inset 3px 0 0 var(--dawn-gold), 0 4px 16px rgba(201,165,76,.12);
+    }
+    .opt.sel .opt-lbl { color: var(--brown-red); }
+
+    /* Buttons — active press + sharper hover */
+    .btn-p:active {
+      transform: translateY(1px);
+      box-shadow: 0 2px 8px rgba(201,165,76,.2);
+    }
+    .btn-p:hover {
+      box-shadow: 0 8px 24px rgba(201,165,76,.45);
+    }
+
+    /* Intro headline — slightly larger */
+    .intro h1 { font-size: 40px; }
+
+    /* Loading spinner — thinner, more elegant */
+    .spinner {
+      width: 36px;
+      height: 36px;
+      border-width: 1.5px;
+      border-top-color: var(--dawn-gold);
+    }
+
+    /* Snapshot archetype title — more presence */
+    .snap-title { font-size: 36px; }
+
+    /* Move cards — gold left accent, more depth */
+    .move-card {
+      border-radius: 10px;
+      border-left: 3px solid var(--dawn-gold);
+      box-shadow: 0 4px 20px rgba(42,36,32,.05);
+      transition: box-shadow .2s ease, transform .2s ease;
+    }
+    .move-card:hover {
+      box-shadow: 0 8px 28px rgba(42,36,32,.08);
+      transform: translateY(-1px);
+    }
+
+    /* Why-fit & anti-pattern boxes — left accent */
+    .why-fit-box {
+      border-left: 3px solid var(--dawn-gold);
+      border-radius: 0 8px 8px 0;
+    }
+    .anti-pattern-box {
+      border-left: 3px solid #E8A0A0;
+      border-radius: 0 8px 8px 0;
+    }
+
+    /* Trait chips — subtle gradient, rounder */
+    .trait-chip {
+      background: linear-gradient(135deg, var(--warm-stone) 0%, #EDE5D8 100%);
+      border-radius: 24px;
+    }
+
+    /* LinkedIn outreach box — slightly warmer */
+    .linkedin-box { border-radius: 10px; }
+
+    /* Feedback wrap — cleaner border */
+    .fb-wrap { border-radius: 10px; }
+
+    /* Result footer brand block */
+    .res-foot { border-radius: 10px; }
+
+    /* Action panel rounded */
+    .action-panel { border-radius: 14px; }
+
+    /* Email confirmation banner — slightly more polished */
+    .email-conf {
+      border-radius: 8px;
+      background: linear-gradient(135deg, #EBF5EF 0%, #E4F3EB 100%);
+    }
   </style>
 </head>
 
@@ -1445,7 +1561,12 @@ Return ONLY perfectly valid JSON matching the schema precisely. No prose outside
     <div class="move-card">
       <div class="move-n">Move ${i + 1}</div>
       <div class="move-t">${escapeHtml(m?.title || ('Action ' + (i + 1)))}</div>
-      <div class="move-b">${escapeHtml    <div class="caveat-banner sf">
+      <div class="move-b">${escapeHtml(m?.body || '')}</div>
+    </div>
+  `).join('');
+
+  document.getElementById('resultContent').innerHTML = `
+    <div class="caveat-banner sf">
       This is a directional read, not a fixed label. Use it to move faster and with better fit.
     </div>
 
@@ -1597,8 +1718,6 @@ Return ONLY perfectly valid JSON matching the schema precisely. No prose outside
     
     <div id="toast" class="toast sf">Copied to clipboard</div>
 `;
-s="fb-sent sf" id="fbSent">&#10003;&nbsp; Received. Thank you &mdash; this shapes what comes next.</div>
-    </div>`;
 
       show('result');
       window.scrollTo(0, 0);
