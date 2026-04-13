@@ -1022,7 +1022,6 @@
       to   { transform: translateY(0); }
     }
 
-    /* Header — gold top border + gradient depth */
     .hdr {
       border-top: 2px solid var(--dawn-gold);
       background: linear-gradient(180deg, #F0EAE0 0%, var(--warm-cream) 100%);
@@ -1036,13 +1035,11 @@
       letter-spacing: -.015em;
     }
 
-    /* Progress bar — 1px thicker, fill glow */
     .prog-bg { height: 4px; }
     .prog-fill {
       box-shadow: 0 0 8px rgba(201,165,76,.45);
     }
 
-    /* Options — lift on hover, gold inset accent when selected */
     .opt {
       border-radius: 10px;
       box-shadow: 0 1px 4px rgba(42,36,32,.03), 0 2px 8px rgba(42,36,32,.02);
@@ -1058,7 +1055,6 @@
     }
     .opt.sel .opt-lbl { color: var(--brown-red); }
 
-    /* Buttons — active press + sharper hover */
     .btn-p:active {
       transform: translateY(1px);
       box-shadow: 0 2px 8px rgba(201,165,76,.2);
@@ -1067,10 +1063,8 @@
       box-shadow: 0 8px 24px rgba(201,165,76,.45);
     }
 
-    /* Intro headline — slightly larger */
     .intro h1 { font-size: 40px; }
 
-    /* Loading spinner — thinner, more elegant */
     .spinner {
       width: 36px;
       height: 36px;
@@ -1078,10 +1072,8 @@
       border-top-color: var(--dawn-gold);
     }
 
-    /* Snapshot archetype title — more presence */
     .snap-title { font-size: 36px; }
 
-    /* Move cards — gold left accent, more depth */
     .move-card {
       border-radius: 10px;
       border-left: 3px solid var(--dawn-gold);
@@ -1093,7 +1085,6 @@
       transform: translateY(-1px);
     }
 
-    /* Why-fit & anti-pattern boxes — left accent */
     .why-fit-box {
       border-left: 3px solid var(--dawn-gold);
       border-radius: 0 8px 8px 0;
@@ -1103,25 +1094,19 @@
       border-radius: 0 8px 8px 0;
     }
 
-    /* Trait chips — subtle gradient, rounder */
     .trait-chip {
       background: linear-gradient(135deg, var(--warm-stone) 0%, #EDE5D8 100%);
       border-radius: 24px;
     }
 
-    /* LinkedIn outreach box — slightly warmer */
     .linkedin-box { border-radius: 10px; }
 
-    /* Feedback wrap — cleaner border */
     .fb-wrap { border-radius: 10px; }
 
-    /* Result footer brand block */
     .res-foot { border-radius: 10px; }
 
-    /* Action panel rounded */
     .action-panel { border-radius: 14px; }
 
-    /* Email confirmation banner — slightly more polished */
     .email-conf {
       border-radius: 8px;
       background: linear-gradient(135deg, #EBF5EF 0%, #E4F3EB 100%);
@@ -1529,13 +1514,9 @@ Return ONLY perfectly valid JSON matching the schema precisely. No prose outside
       }
     }
 
+    const ESC = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' };
     function escapeHtml(s) {
-      return String(s ?? '')
-        .replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&#039;');
+      return String(s ?? '').replace(/[&<>"']/g, c => ESC[c]);
     }
     
     function copyToClipboard(text) {
@@ -1617,7 +1598,7 @@ Return ONLY perfectly valid JSON matching the schema precisely. No prose outside
       </div>
     </div>
 
-    ${r?.linkedin_outreach ? `
+    ${r?.linkedin_outreach ? (() => { const li = escapeHtml(r.linkedin_outreach); return `
     <div class="res-sec">
       <div class="linkedin-box">
         <div class="in-hdr">
@@ -1625,11 +1606,11 @@ Return ONLY perfectly valid JSON matching the schema precisely. No prose outside
             <svg width="14" height="14" viewBox="0 0 24 24" fill="var(--dawn-gold)"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
             Outreach Script
           </div>
-          <button class="in-btn sf" id="copyBtn" onclick="copyToClipboard(\`${escapeHtml(r.linkedin_outreach).replace(/\n/g, '\\n')}\`)">Copy Message</button>
+          <button class="in-btn sf" id="copyBtn" onclick="copyToClipboard(\`${li.replace(/\n/g, '\\n')}\`)">Copy Message</button>
         </div>
-        <div class="in-body">${escapeHtml(r.linkedin_outreach)}</div>
+        <div class="in-body">${li}</div>
       </div>
-    </div>` : ''}
+    </div>`; })() : ''}
 
     ${r?.timing_note ? `
     <div class="res-sec sec-secondary">
@@ -1865,37 +1846,57 @@ Return ONLY perfectly valid JSON matching the schema precisely. No prose outside
       c.querySelectorAll('.star').forEach(s => s.classList.toggle('lit', parseInt(s.dataset.n) <= n));
     }
 
+    async function saveFeedbackToSupabase(data) {
+      await fetch(`${SUPA_URL}/rest/v1/quiz_feedback`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': SUPA_KEY,
+          'Authorization': `Bearer ${SUPA_KEY}`,
+          'Prefer': 'return=minimal',
+        },
+        body: JSON.stringify(data),
+      });
+    }
+
     async function submitFeedback() {
       const btn = document.getElementById('fbBtn');
       btn.disabled = true; btn.textContent = 'Sending...';
-      const payload = {
-        to_email: FEEDBACK_TO_EMAIL,
-        subject: 'New ESCP quiz feedback',
-        from_email: userEmail,
+      const data = {
+        from_email: userEmail || null,
         question_quality: String(fbState.q1 || ''),
         career_accuracy: String(fbState.q2 || ''),
         quiz_duration: String(fbState.duration || ''),
         open_feedback: String(fbState.open || ''),
-        timestamp: new Date().toISOString(),
-        reply_to: userEmail || FEEDBACK_TO_EMAIL,
-        name: deriveName(userEmail),
       };
 
       try {
-        if (!EMAILJS_KEY || EMAILJS_KEY === 'YOUR_EMAILJS_PUBLIC_KEY') {
-          throw new Error('Email delivery is not configured.');
+        // Supabase is the reliable capture — always runs first
+        await saveFeedbackToSupabase(data);
+
+        // EmailJS notification is best-effort on top
+        if (EMAILJS_KEY && EMAILJS_KEY !== 'YOUR_EMAILJS_PUBLIC_KEY' && typeof emailjs !== 'undefined') {
+          emailjs.send(EMAILJS_SVC, EMAILJS_TPL_FEEDBACK, {
+            to_email: FEEDBACK_TO_EMAIL,
+            subject: 'New ESCP quiz feedback',
+            from_email: userEmail,
+            reply_to: userEmail || FEEDBACK_TO_EMAIL,
+            name: deriveName(userEmail),
+            question_quality: data.question_quality,
+            career_accuracy: data.career_accuracy,
+            quiz_duration: data.quiz_duration,
+            open_feedback: data.open_feedback,
+            timestamp: new Date().toISOString(),
+          }).catch(e => console.warn('EmailJS feedback notification failed:', e));
         }
-        if (typeof emailjs === 'undefined') {
-          throw new Error('EmailJS is not loaded. Please refresh and try again.');
-        }
-        await emailjs.send(EMAILJS_SVC, EMAILJS_TPL_FEEDBACK, payload);
+
         btn.style.display = 'none';
         document.getElementById('fbSent').style.display = 'block';
       } catch (e) {
-        console.log('Feedback email error:', e);
+        console.error('Feedback save error:', e);
         btn.disabled = false;
         btn.textContent = 'Send feedback →';
-        alert('Could not send feedback. Please try again.');
+        alert('Could not save feedback. Please try again.');
       }
     }
 
