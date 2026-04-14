@@ -1186,6 +1186,7 @@
     const EMAILJS_SVC = 'service_xbuhjgq';
     const EMAILJS_TPL_RESULT = 'template_sj9ng1b';
     const EMAILJS_TPL_FEEDBACK = 'template_rn537v8';
+    const FEEDBACK_FORM_URL = 'https://forms.gle/s9zxDUCdqFoYjjex8';
 
     // Supabase email list
     const SUPA_URL = 'https://rzldnagyqwahvlqkvvdv.supabase.co';
@@ -1806,6 +1807,7 @@ Return ONLY perfectly valid JSON matching the schema precisely. No prose outside
         name: deriveName(userEmail),
         subject: 'Quick feedback (30 seconds)',
         from_email: userEmail,
+        feedback_url: FEEDBACK_FORM_URL,
         question_quality: '',
         career_accuracy: '',
         open_feedback: '',
@@ -1882,6 +1884,7 @@ Return ONLY perfectly valid JSON matching the schema precisely. No prose outside
             from_email: userEmail,
             reply_to: userEmail || FEEDBACK_TO_EMAIL,
             name: deriveName(userEmail),
+            feedback_url: FEEDBACK_FORM_URL,
             question_quality: data.question_quality,
             career_accuracy: data.career_accuracy,
             quiz_duration: data.quiz_duration,
