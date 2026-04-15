@@ -90,7 +90,7 @@ export default async function handler(req, res) {
           { role: 'system', content: 'You are a career intelligence assistant. Respond with a JSON object that exactly matches the required schema.' },
           { role: 'user', content: prompt }
         ],
-        max_tokens: 2500,
+        max_tokens: 2500, // why_this_fits + career_protocol bodies push past 1600
         response_format: {
           type: 'json_schema',
           json_schema: RESULT_JSON_SCHEMA,

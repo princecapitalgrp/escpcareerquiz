@@ -1879,10 +1879,10 @@ Return ONLY perfectly valid JSON matching the schema precisely. No prose outside
         // EmailJS notification is best-effort on top
         if (EMAILJS_KEY && EMAILJS_KEY !== 'YOUR_EMAILJS_PUBLIC_KEY' && typeof emailjs !== 'undefined') {
           emailjs.send(EMAILJS_SVC, EMAILJS_TPL_FEEDBACK, {
-            to_email: FEEDBACK_TO_EMAIL,
-            subject: 'New ESCP quiz feedback',
+            to_email: userEmail,
+            subject: 'Your feedback — Rise by Solis',
             from_email: userEmail,
-            reply_to: userEmail || FEEDBACK_TO_EMAIL,
+            reply_to: FEEDBACK_TO_EMAIL,
             name: deriveName(userEmail),
             feedback_url: FEEDBACK_FORM_URL,
             question_quality: data.question_quality,
